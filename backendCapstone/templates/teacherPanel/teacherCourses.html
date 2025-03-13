@@ -1,0 +1,294 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Head Panel</title>
+
+    <link rel="stylesheet" href="{% static 'css/courses.css' %}">
+    <link rel="stylesheet" href="{% static 'css/exploreCourses.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/Capstone/static/css/popUpMessage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+        }
+
+/*Cellphone*/
+@media only screen and (max-width: 600px){
+.subAddListContainer{
+    width: 97%;
+    overflow: auto;
+}
+}
+
+/*tablet*/
+@media only screen and (min-width: 601px) and (max-width: 1024px){
+    .subAddListContainer{
+        width: 24rem;
+        height: auto;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1440px){
+    .subAddListContainer{
+        height: auto;
+        width: 24rem;
+    }
+}
+    </style>
+</head>
+<body style="background-color: rgb(240,240,240);">
+    <div class="container" style="background-color: rgb(240,240,240);">
+        <div class="fixedContainer">
+            <div class="headerContainer">
+                <div class='menubarContainer' onclick='toggleMenu(this)'>
+                    <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                    <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                    <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                </div>
+
+                <div>
+                    <p style="font-weight: bold; font-size: 1.1rem; color: rgb(72,72,72);">{{ teacher_course }}</p>
+                </div>
+            </div>
+    
+            <div style="background-color: rgb(240,240,240); z-index: 1;" class="subMenubarContainer">
+                <a href="{% url 'dashboardTeacher' %}">
+                    <div class="barContainer">
+                        <p>Dashboard</p>
+                    </div>
+                </a>
+                
+                <a href="{% url 'teacherPanel' %}">
+                    <div class="barContainer">
+                        <p>List of students</p>
+                    </div>
+                </a>
+    
+                <a href="{% url 'approved_students' %}">
+                    <div class="barContainer">
+                        <p>Approve</p>
+                    </div>
+                </a>
+    
+                <a href="{% url 'teacherCourses' %}">
+                    <div class="barContainer">
+                        <p>Courses</p>
+                    </div>
+                </a>
+    
+                <a href="{% url 'setting' %}">
+                    <div class="barContainer">
+                        <p>Setting</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    <div class="barContainer1">
+                        <p>Logout</p>
+                    </div>
+                </a>
+            </div>
+    
+            <div class="filterContainer">
+                <div class="textContainer">
+                    <p style="color: rgb(72,72,72);">Course</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="courseContainer5" style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 0;">
+            {% for course in courses %}
+                <div class="subCourseContainer5 subCourse">
+                    <div class="courseInfoContainer5">
+                        <div class="logoContainer5">
+                            <img 
+                                class="logo5" 
+                                src="{% static 'img/' %}{{ course.Logo|escapejs }}" 
+                                alt="{{ course.Course|escape }}">
+                        </div>
+    
+                        <div class="courseNameContainer5">
+                            <p class="courseName5" style="width: 100%;">{{ course.Course }}</p>
+                        </div>
+    
+                        <div class="viewContainer5">
+                            <button style=" color: rgb(72,72,72); margin-left: 0.5rem;margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;" onclick="viewCourse({{ course.id }})" class="viewButton">View<img style="height: 1.2rem;" src="{% static 'img/eye.svg' %}" alt=""></button>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No courses available.</p>
+            {% endfor %}
+        </div>
+
+        {% if course and not editing %}
+        <div class="addListContainer" style="display: block; height: 100vh;">
+            <div class="addListContainer">
+                <div class="subAddListContainer">
+                    <div class="closeContainer" style="margin-bottom: 1rem;">
+                        <div class="subCloseContainer">
+                            <a class="closeButton8" href="{% url 'teacherCourses' %}">
+                                <img style="height: 1.5rem;" class="closeButton8" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                            </a>
+                        </div>
+
+                        <div style="
+                        width: 19.6rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.6rem;
+                        font-weight: bold;
+                        padding-right: 2.5rem;">
+                            <p>Course information</p>
+                        </div>
+                    </div>
+        
+                    <div class="infoContainer">
+                        <div class="subInfoContainer" style="flex-direction: column;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">College:</p>
+                            <div class="info" required style="min-height: 3rem; justify-content: left; padding-left: 0.5rem;">
+                                <p>{{ course.College }}</p>
+                            </div>
+                        </div>
+        
+                        <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Course:</p>
+                            <div class="info" required style="min-height: 3rem; justify-content: left; padding-left: 0.5rem;">
+                                <p>{{ course.Course }}</p>
+                            </div>
+                        </div>
+        
+                        <div class="subInfoContainer" style="gap: 1rem;">
+                            <div style="flex-direction: column; margin-top: 2rem;">
+                                <p style="width: 100%; justify-content: left;">Grade average:</p>
+                                <div class="info" required style="width: 10rem; min-height: 3rem; justify-content: left; padding-left: 0.5rem;">
+                                    <p>Grade avg: {{course.AvgGrade}}</p>
+                                </div>
+                            </div>
+                            
+                            <div style="flex-direction: column; margin-top: 2rem;">
+                                <p style="width: 100%; justify-content: left;">CET average:</p>
+                                <div class="info" required style="width: 10rem; min-height: 3rem; justify-content: left; padding-left: 0.5rem;">
+                                    <p>CET avg: {{course.AvgCet}}</p>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="subInfoContainer1" style="flex-direction: column; margin-top: 1rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Description:</p>
+                            <div class="info1" required  style="min-height: 3rem; justify-content: left; padding-left: 0.5rem; overflow: auto;">
+                                <p style="height: 10rem;">{{ course.CourseDescription }}</p>
+                            </div>
+                        </div>
+ 
+                        <div style="outline: none;" class="closeContainer1">
+                            <button onclick="editCourse({{ course.id }})" class="closeButton9">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if editing %}
+        <div class="addListContainer1" style="display: block; height: 100vh;">
+            <div class="addListContainer1">
+                <div class="subAddListContainer">
+                    <div class="closeContainer" style="margin-bottom: 1rem;">
+                        <div class="subCloseContainer">
+                            <a class="closeButton8" href="{% url 'teacherCourses' %}">
+                                <img style="height: 1.5rem;" class="closeButton8" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                            </a>
+                        </div>
+
+                        <div style="
+                        width: 19.6rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.6rem;
+                        font-weight: bold;
+                        padding-right: 2.5rem;">
+                            <p>Edit course information</p>
+                        </div>
+                    </div>
+        
+                    <div class="infoContainer">
+                        <form class="infoContainer" method="post" action="">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ course.id }}">
+                            
+                            <div class="subInfoContainer" style="flex-direction: column;">
+                                <p style="justify-content:left; width: 100%; padding-left: 2rem;">College:</p>
+                                <input style="min-height: 3rem; text-align: left; padding-left: 0.5rem;" type="text" name="College" value="{{ course.College }}" class="info1" required  disabled>
+                            </div>
+
+                            <div class="subInfoContainer1" style="flex-direction: column;">
+                                <p style="justify-content:left; width: 100%; padding-left: 2rem;">Course:</p>
+                                <input style="height: 3rem; text-align: left; padding-left: 0.5rem;" type="text" name="Course" value="{{ course.Course }}" class="info1" required disabled>
+                            </div>
+
+                            <div class="subInfoContainer" style="column-gap: 1rem; width: 93%;">
+                                <div>
+                                    <p style="justify-content:left; width: 100%;">Grade avg:</p>
+                                    <input style="height: 3rem; text-align: left; padding-left: 0.5rem;" type="text" name="AvgGrade" value="{{ course.AvgGrade }}" class="info" required>
+                                </div>
+
+                                <div>
+                                    <p style="justify-content:left; width: 100%;">Cet avg:</p>
+                                    <input style="height: 3rem; text-align: left; padding-left: 0.5rem;" type="text" name="AvgCet" value="{{ course.AvgCet }}" class="info" required>
+                                </div>
+                            </div>
+
+                            <div class="subInfoContainer1" style="flex-direction: column;">
+                                <p style="justify-content:left; width: 100%; padding-left: 2rem;">Description:</p>
+                                <textarea name="CourseDescription" class="info1" required  style="height: 10rem; text-align: left; padding-left: 0.5rem;">{{ course.CourseDescription }}</textarea>
+                            </div>
+
+                            <div style="outline: none;" class="closeContainer1">
+                                <button type="submit" class="closeButton9">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <script src="{% static 'js/exploreCourses.js' %}"></script>
+    <script>
+        
+        function showPopup() {
+          const popup = document.getElementById('successPopup');
+          popup.style.display = 'flex'; 
+      
+          setTimeout(() => {
+            popup.style.display = 'none'; 
+          }, 2000);
+        }
+
+        document.getElementById('collegeSelect').addEventListener('change', function() {
+            const selectedCollege = this.value;
+            window.location.href = `?college=${selectedCollege}`;
+        });
+
+        function viewCourse(courseId) {
+            window.location.href = `?view=${courseId}`;
+        }
+
+        function editCourse(courseId) {
+            window.location.href = `?edit=${courseId}`;
+        }
+    </script>
+</body>
+</html>

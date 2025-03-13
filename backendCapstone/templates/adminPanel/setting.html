@@ -1,0 +1,238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'css/setting.css' %}">
+    <link rel="stylesheet" href="/Capstone/static/css/setting.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+        }
+
+/*Cellphone*/
+@media only screen and (max-width: 600px){
+.subAddListContainer, .subLoginFormContainer{
+    width: 90%;
+    overflow: auto;
+}
+}
+    </style>
+</head>
+<body style="background-color: rgb(240,240,240);">
+    <div class="container" style="background-color: rgb(240,240,240);">
+        <div class="headerContainer">
+            <div class='menubarContainer' onclick='toggleMenu(this)'>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+            </div>
+        </div>
+
+        <div style="background-color: rgb(240,240,240);" class="subMenubarContainer">
+            <a href="{% url 'dashboardAdmin' %}">
+                <div class="barContainer">
+                    <p>Dashboard</p>
+                </div>
+            </a>
+            
+            <a href="{% url 'adminPanel' %}">
+                <div class="barContainer">
+                    <p>List of teachers</p>
+                </div>
+            </a>
+
+            <a href="{% url 'course' %}">
+                <div class="barContainer">
+                    <p>List of courses</p>
+                </div>
+            </a>
+
+            <a href="{% url 'feedback' %}">
+                <div class="barContainer">
+                    <p>List of feedbacks</p>
+                </div>
+            </a>
+
+            <a href="{% url 'adminSetting' %}">
+                <div class="barContainer">
+                    <p>Settings</p>
+                </div>
+            </a>
+
+            <a href="{% url 'logout' %}">
+                <div class="barContainer1">
+                    <p>Logout</p>
+                </div>
+            </a>
+        </div>
+
+        <div style="outline: none;" class="subContainer">
+            <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="addlist1()">
+                <div style="outline: none;" class="subSettingContainer">
+                    <img class="person" src="{% static 'img/percentage.svg' %}" alt="">
+                </div>
+                <div style="outline: none;" class="textContainer4">
+                    <p>Edit Percentage</p>
+                </div>
+            </div>
+
+            <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="login()">
+                <div style="outline: none;" class="subSettingContainer">
+                    <img class="person" src="{% static 'img/image-removebg-preview (2).png' %}" alt="">
+                </div>
+                <div style="outline: none;" class="textContainer4">
+                    <p>Change password</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loginFormContainer" style="display: none; position: fixed;">
+        <div class="loginFormContainer">
+            <div class="subLoginFormContainer">
+                <div class="closeContainer">
+                    <div class="subCloseContainer">
+                        <img onclick="login()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                    </div>
+                    <div class="loginTextContainer">
+                        <p>Change password</p>
+                    </div>
+                </div>
+                <form method="POST" action="{% url 'adminSetting' %}">
+                    {% csrf_token %}
+                    <div class="inputContainer">
+                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your old password:</p>
+                            <input class="inputEmail" type="password" name="old_password" required>
+                        </div>
+                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your new password:</p>
+                            <input class="inputEmail" type="password" name="new_password" required>
+                        </div>
+                        <div class="subInputContainer">
+                            <button type="submit" name="change_password" class="loginButton1">Save</button>
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="addListContainer1" style="display: none;">
+        <div class="addListContainer" style="background-color: none; position: fixed;">
+            <div class="subAddListContainer">
+                <form method="POST" action="{% url 'adminSetting' %}">
+                    {% csrf_token %}
+                    <div class="closeContainer">
+                        <div class="subCloseContainer">
+                            <img onclick="addlist1()" class="closeButton" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                        </div>
+                        <div class="loginTextContainer">
+                            <p>Edit Percentage</p>
+                        </div>
+                    </div>
+                    <div class="infoContainer">
+                        <div class="subInfoContainer" style="flex-direction: column;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">CET percentage:</p>
+                            <select style="min-height: 3rem;" required class="info" name="cet_percentage">
+                                <option value="">Choose a percentage</option>
+                                <option value="0.9" {% if cet_percentage == 0.9 %} selected {% endif %}>90</option>
+                                <option value="0.8" {% if cet_percentage == 0.8 %} selected {% endif %}>80</option>
+                                <option value="0.7" {% if cet_percentage == 0.7 %} selected {% endif %}>70</option>
+                                <option value="0.6" {% if cet_percentage == 0.6 %} selected {% endif %}>60</option>
+                                <option value="0.5" {% if cet_percentage == 0.5 %} selected {% endif %}>50</option>
+                                <option value="0.4" {% if cet_percentage == 0.4 %} selected {% endif %}>40</option>
+                                <option value="0.3" {% if cet_percentage == 0.3 %} selected {% endif %}>30</option>
+                                <option value="0.2" {% if cet_percentage == 0.2 %} selected {% endif %}>20</option>
+                                <option value="0.1" {% if cet_percentage == 0.1 %} selected {% endif %}>10</option>
+                                <option value="0.05" {% if cet_percentage == 0.05 %} selected {% endif %}>5</option>
+                            </select>
+                        </div>
+    
+                        <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Personality Test Percentage:</p>
+                            <select style="min-height: 3rem;" required class="info" name="personality_percentage">
+                                <option value="">Choose a percentage</option>
+                                <option value="0.9" {% if personality_percentage == 0.9 %} selected {% endif %}>90</option>
+                                <option value="0.8" {% if personality_percentage == 0.8 %} selected {% endif %}>80</option>
+                                <option value="0.7" {% if personality_percentage == 0.7 %} selected {% endif %}>70</option>
+                                <option value="0.6" {% if personality_percentage == 0.6 %} selected {% endif %}>60</option>
+                                <option value="0.5" {% if personality_percentage == 0.5 %} selected {% endif %}>50</option>
+                                <option value="0.4" {% if personality_percentage == 0.4 %} selected {% endif %}>40</option>
+                                <option value="0.3" {% if personality_percentage == 0.3 %} selected {% endif %}>30</option>
+                                <option value="0.2" {% if personality_percentage == 0.2 %} selected {% endif %}>20</option>
+                                <option value="0.1" {% if personality_percentage == 0.1 %} selected {% endif %}>10</option>
+                                <option value="0.05" {% if personality_percentage == 0.05 %} selected {% endif %}>5</option>
+                            </select>
+                        </div>
+    
+                        <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Average Grades Percentage:</p>
+                            <select style="min-height: 3rem;" required class="info" name="grade_percentage">
+                                <option value="">Choose a percentage</option>
+                                <option value="0.9" {% if grade_percentage == 0.9 %} selected {% endif %}>90</option>
+                                <option value="0.8" {% if grade_percentage == 0.8 %} selected {% endif %}>80</option>
+                                <option value="0.7" {% if grade_percentage == 0.7 %} selected {% endif %}>70</option>
+                                <option value="0.6" {% if grade_percentage == 0.6 %} selected {% endif %}>60</option>
+                                <option value="0.5" {% if grade_percentage == 0.5 %} selected {% endif %}>50</option>
+                                <option value="0.4" {% if grade_percentage == 0.4 %} selected {% endif %}>40</option>
+                                <option value="0.3" {% if grade_percentage == 0.3 %} selected {% endif %}>30</option>
+                                <option value="0.2" {% if grade_percentage == 0.2 %} selected {% endif %}>20</option>
+                                <option value="0.1" {% if grade_percentage == 0.1 %} selected {% endif %}>10</option>
+                                <option value="0.05" {% if grade_percentage == 0.05 %} selected {% endif %}>5</option>
+                            </select>
+                        </div>
+    
+                        <div class="buttonContainer2">
+                            <button type="submit" name="update_percentage" class="button1">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Message Popups -->
+{% for message in messages %}
+<div class="popUpMessageContainer1" style="display: flex;">
+    <div class="subPopUpMessageContainer">
+        <div class="imageContainer88">
+            {% if message.tags == 'success' %}
+            <img class="image88" src="{% static 'img/rb_1749.png' %}" alt="Success Icon">
+            {% else %}
+            <img class="image88" src="{% static 'img/rb_83749.png' %}" alt="Error Icon">
+            {% endif %}
+        </div>
+        <div class="textContainer88" style="margin-bottom: 1rem;">
+            <p>{{ message }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+    <script src="{% static 'js/exploreCourses.js' %}"></script>
+    <script src="{% static 'js/loginForm.js' %}"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const popUps = document.querySelectorAll(".popUpMessageContainer1");
+
+    popUps.forEach((popup) => {
+        setTimeout(() => {
+            popup.style.display = "none";
+        }, 3000); // Hide popup after 5 seconds
+    });
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,759 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Head Panel</title>
+    <link rel="stylesheet" href="{% static 'css/adminPanel.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+        }
+    </style>
+    <style>
+        .subAddListContainer{
+            height: 90%; 
+            overflow-x: hidden; 
+            overflow-y: auto;
+        }
+        .size6{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .size5{
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .buttonContainer2{
+            width: 100%;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+        /*tablet*/
+        @media only screen and (min-width: 601px) and (max-width: 1024){
+        
+            .subFilterContainer{
+                flex-direction: row;
+            }
+
+            .size6{
+                display: flex;
+                flex-direction: column;
+                width: 95%;
+            }
+        
+            .averageContainer{
+                justify-content: left;
+            }
+        
+            .filterContainer{
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1rem;
+            }
+        
+            .subFilterContainer{
+                margin: 0;
+            }
+        
+            .subNameContainer{
+                justify-content: left;
+            }
+        
+            .infoContainer{
+                display: flex;
+                flex-direction: row;
+            }
+
+            .infoContainer3{
+                display: flex;
+                flex-direction: column;
+                overflow: auto;
+            }
+
+            .subAddListContainer{
+                width: 70%;
+                height: 30rem;
+                overflow: auto;
+            }
+
+            .size5{
+                width: 90%;
+                display: flex;
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        @media only screen and (min-width: 1025px){
+        
+        .subFilterContainer{
+            flex-direction: row;
+        }
+
+        .size6{
+            display: flex;
+            flex-direction: row;
+            width: 95%;
+        }
+    
+        .averageContainer{
+            justify-content: left;
+        }
+    
+        .filterContainer{
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+    
+        .subFilterContainer{
+            margin: 0;
+        }
+    
+        .subNameContainer{
+            justify-content: left;
+        }
+    
+        .infoContainer{
+            display: flex;
+            flex-direction: row;
+        }
+
+        .infoContainer3{
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+        }
+
+        .subAddListContainer{
+            width: 70%;
+            height: 30rem;
+            overflow: auto;
+        }
+
+        .size5{
+            width: 90%;
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .size77{
+        width: 94%;
+        margin-right: 0.9rem;
+        }
+    }
+
+/*Cellphone*/
+@media only screen and (max-width: 600px){
+.subAddListContainer{
+    width: 90%;
+    overflow: auto;
+}
+}
+        </style>
+</head>
+<body style="background-color: rgb(240,240,240);">
+    <div class="container" style="background-color: rgb(240,240,240);">
+        <div class="fixedContainer">
+            <div class="headerContainer">
+                <div class='menubarContainer' onclick='toggleMenu(this)'>
+                    <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                    <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                    <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                </div>
+
+                <div>
+                    <p style="font-weight: bold; font-size: 1.1rem; color: rgb(72,72,72);">{{ teacher_course }}</p>
+                </div>
+            </div>
+    
+            <div style="background-color: rgb(240,240,240);" class="subMenubarContainer">
+                <a href="{% url 'dashboardTeacher' %}">
+                    <div class="barContainer">
+                        <p>Dashboard</p>
+                    </div>
+                </a>
+                
+                <a href="{% url 'teacherPanel' %}">
+                    <div class="barContainer">
+                        <p>List of students</p>
+                    </div>
+                </a>
+    
+                <a href="{% url 'approved_students' %}">
+                    <div class="barContainer">
+                        <p>Approved</p>
+                    </div>
+                </a>
+    
+                <a href="{% url 'teacherCourses' %}">
+                    <div class="barContainer">
+                        <p>Courses</p>
+                    </div>
+                </a>
+    
+                <a href="{% url 'setting' %}">
+                    <div class="barContainer">
+                        <p>Setting</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    <div class="barContainer1">
+                        <p>Logout</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="filterContainer">
+                <div class="textContainer">
+                    <p style="color: rgb(72,72,72);">List of students</p>
+                </div>
+
+                <div class="subFilterContainer">
+                    <form class="subFilterContainer" id="filterForm" method="get" action="{% url 'teacherPanel' %}">
+                        <select style="width: 19.5rem; display: none;" class="filter" name="course" id="courseFilter" onchange="filterByCourse()">
+                        <input class="searchBar" type="text" name="search" id="searchBar" placeholder="Search..." value="{{ search_query }}">
+                        <button type="submit" style="display: none;"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="listContainer">
+            {% for student in students %}
+            <div class="subListContainer">
+                <div class="nameContainer">
+                    <div class="subNameContainer">
+                        <p>{{ student.Name }}</p>
+                    </div>
+
+                    <div class="averageContainer">
+                        <div class="grades">
+                            <p>Grade avg: {{ student.AvgGrade }}</p>
+                        </div>
+
+                        <div class="grades">
+                            <p>CET avg: {{ student.AvgCet }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="viewButtonContainer">
+                    <button class="viewButton" id="student-{{ student.id }}" onclick="showStudent(
+                        '{{ student.id }}', 
+                        '{{ student.Name }}', 
+                        '{{ student.Email }}', 
+                        '{{ student.AvgGrade }}', 
+                        '{{ student.AvgCet }}', 
+                        '{{ student.Number }}', 
+                        '{{ student.ApplicationNo }}', 
+                        '{{ student.Address }}', 
+                        '{{ student.Course }}', 
+                        this, 
+                        '{{ student.ReadingComprehension }}', 
+                        '{{ student.EnglishProficiency }}', 
+                        '{{ student.ScienceProcessSkills }}', 
+                        '{{ student.MathematicalSkills }}', 
+                        '{{ student.AbstractLogicThinkingSkills }}',
+                        '{{ student.CetPicture }}',  
+                        '{{ student.GradePicture }}' 
+                    )">View</button>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="addListContainer" id="studentDetail" style="display: none;  position: fixed;">
+        <div class="addListContainer" style="background-color: none;">
+            <div class="subAddListContainer">
+                <div class="closeContainer" style="margin-bottom: 1rem;">
+                    <div class="subCloseContainer">
+                        <img onclick="closeStudent()" class="closeButton8" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                    </div>
+
+                    <div style="
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.6rem;
+                    font-weight: bold;
+                    padding-right: 2.5rem;">
+                        <p>Student information</p>
+                    </div>
+                </div>
+                
+                <div class="uploadContainer">
+                    <div class="subUploadContainer">
+                        <!-- CET Image -->
+                        <div class="upload">
+                            <img onclick="zoomCet(this)" id="cetImage" class="picture4" src="{{ student.CetPicture }}" alt="CET Image" />
+                        </div>
+                    </div>
+                
+                    <div class="subUploadContainer">
+                        <!-- Grade Image -->
+                        <div class="upload">
+                            <img onclick="zoomGrade(this)" id="gradeImage" class="picture4" src="{{ student.GradePicture }}" alt="Grade Image" />
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="infoContainer3">
+                        <div class="size6">
+                            <div class="size5" style="justify-content: center; align-items: center;">
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Name:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="studentName"></p>
+                                    </div>
+                                </div>
+    
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Email:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; overflow: auto; text-align: left; padding-left: 1.5rem;">
+                                        <p id="studentEmail"></p>
+                                    </div>
+                                </div>
+
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Grade Average:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; overflow: auto; text-align: left; padding-left: 1.5rem;">
+                                        <p id="studentAvgGrade"></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">CET overall:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; overflow: auto; text-align: left; padding-left: 1.5rem;">
+                                        <p id="studentAvgCet"></p>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="subInfoContainer size77" style="flex-direction: row; gap: 1rem; margin-top: 1rem; align-items: center;">
+                                    <div style="width: 100%; height: 3rem;">
+                                        <p style="width: 100%; justify-content: left; padding-left: 1rem; font-size: 0.8rem;">Grade Average:</p>
+                                        <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                            <p id="studentAvgGrade"></p>
+                                        </div>
+                                    </div>
+
+                                    <div style="width: 100%; height: 3rem;">
+                                        <p style="width: 100%; justify-content: left; padding-left: 1rem; font-size: 0.8rem;">CET overall:</p>
+                                        <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                            <p id="studentAvgCet"></p>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+    
+                            <div class="size5"> 
+                                   
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:2rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Contact No.:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="studentNumber"></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Application No:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="ApplicationNo"></p>
+                                    </div>
+                                </div>                    
+    
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Address:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="studentAddress"></p>
+                                    </div>
+                                </div>
+    
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Course:</p>
+                                    <div class="info1" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="studentCourse"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="size5" style="display: none;">  
+                                
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem; margin: 0;">English Proficiency:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="englishProficiency"></p>
+                                    </div>
+                                </div>  
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Reading Comprehension:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="readingComprehension"></p>
+                                    </div>
+                                </div>                    
+    
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Science Process Skills:</p>
+                                    <div class="info" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="scienceProcessSkills"></p>
+                                    </div>
+                                </div>
+    
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Mathematical Skills:</p>
+                                    <div class="info1" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="mathematicalSkills"></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top:1.5rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Abstract & Logic Thinking Skills:</p>
+                                    <div class="info1" style="min-height: 3rem; justify-content: left; text-align: left; padding-left: 1.5rem;">
+                                        <p id="abstractLogicThinkingSkills"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="buttonContainer2" style="height: 5rem;">
+                            <button class="button1" id="approveButton" onclick="updateStatus('Approved')">Approved</button>
+                            <button class="button1" id="declineButton" onclick="updateStatus('Declined')">Declined</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zoomContainer cet" style="display: none; position: fixed;">
+        <div class="subZoomContainer">
+            <img onclick="closeZoom()" class="closeButton10" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="Close Button">
+        </div>
+        <div class="bigPictureContainer">
+            <img class="subBigPictureContainer" style="max-height: 90%; max-width: 90%;" src="" alt="CET Image">
+        </div>
+    </div>
+    
+    <div class="zoomContainer grade" style="display: none; position: fixed;">
+        <div class="subZoomContainer">
+            <img onclick="closeZoom()" class="closeButton10" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="Close Button">
+        </div>
+        <div class="bigPictureContainer">
+            <img style="max-height: 90%; max-width: 90%;" class="subBigPictureContainer" src="" alt="Grade Image">
+        </div>
+    </div>
+    
+<div class="popUpMessageContainer1" id="processingMessage">
+    <div class="subPopUpMessageContainer">
+        <div class="imageContainer88">
+            <img class="image89" src="{% static 'img/rb_6326.png' %}" alt="">
+        </div>
+
+        <div class="textContainer88" style="margin-bottom: 1rem;">
+            <p>Processing your request...</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="popUpMessageContainer1" id="errorPopup">
+    <div class="subPopUpMessageContainer">
+        <div class="imageContainer88">
+            <img class="image88" src="{% static 'img/rb_3505.png' %}" alt="">
+        </div>
+
+        <div class="textContainer88" style="margin-bottom: 1rem;">
+            <p>Request failed. Please check your connection and try again.</p>
+        </div>
+    </div>
+</div>
+
+<div class="popUpMessageContainer1" id="successPopup">
+    <div class="subPopUpMessageContainer">
+        <div class="imageContainer88">
+            <img class="image88" src="{% static 'img/rb_1749.png' %}" alt="">
+        </div>
+
+        <div class="textContainer88" style="margin-bottom: 1rem;">
+            <p>Status updated and email sent successfully!</p>
+        </div>
+    </div>
+</div>
+
+    <script>
+        
+        function showPopup() {
+          const popup = document.getElementById('successPopup');
+          popup.style.display = 'flex'; 
+      
+          setTimeout(() => {
+            popup.style.display = 'none'; 
+          }, 2000);
+        }
+
+        var previousSelectedElement = null;
+        var currentStudentId = null;
+
+        function showStudent(id, name, email, avgGrade, avgCet, number, ApplicationNo, address, course, element, readingComprehension, englishProficiency, scienceProcessSkills, mathematicalSkills, abstractLogicThinkingSkills, CetPicture, GradePicture) {
+    console.log(element);  // Debugging line to check if the element is correct
+    if (previousSelectedElement) {
+        previousSelectedElement.classList.remove('selected');
+    }
+
+    if (element) {
+        element.classList.add('selected');
+        previousSelectedElement = element;
+    }
+
+    // Fill the student details
+    document.getElementById('studentName').innerText = name || 'N/A';
+    document.getElementById('studentEmail').innerText = email || 'N/A';
+    document.getElementById('studentAvgGrade').innerText = 'Grade avg: ' + (avgGrade || 'N/A');
+    document.getElementById('studentAvgCet').innerText = 'CET avg: ' + (avgCet || 'N/A');
+    document.getElementById('studentNumber').innerText = number || 'N/A';
+    document.getElementById('ApplicationNo').innerText = ApplicationNo || 'N/A';
+    document.getElementById('studentAddress').innerText = address || 'N/A';
+    document.getElementById('studentCourse').innerText = course || 'N/A';
+    document.getElementById('englishProficiency').innerText = englishProficiency || 'N/A';
+    document.getElementById('readingComprehension').innerText = readingComprehension || 'N/A';
+    document.getElementById('scienceProcessSkills').innerText = scienceProcessSkills || 'N/A';
+    document.getElementById('mathematicalSkills').innerText = mathematicalSkills || 'N/A';
+    document.getElementById('abstractLogicThinkingSkills').innerText = abstractLogicThinkingSkills || 'N/A';
+
+    document.getElementById('cetImage').src = `/media/${CetPicture}`;
+    document.getElementById('gradeImage').src = `/media/${GradePicture}`;   
+
+    // Display the student detail panel
+    document.getElementById('studentDetail').style.display = 'block';
+
+    currentStudentId = id;
+}
+
+function zoomGrade(imageElement) {
+    let zoomContainer = document.querySelector(".zoomContainer.grade");
+    let zoomImage = zoomContainer.querySelector(".subBigPictureContainer");
+
+    if (imageElement && zoomImage) {
+        zoomImage.src = imageElement.src; // Set the clicked image's path to the zoomed image
+        zoomContainer.style.display = "flex"; // Show the zoom container
+    }
+}
+
+function zoomCet(imageElement) {
+    let zoomContainer = document.querySelector(".zoomContainer.cet");
+    let zoomImage = zoomContainer.querySelector(".subBigPictureContainer");
+
+    if (imageElement && zoomImage) {
+        zoomImage.src = imageElement.src; // Set the clicked image's path to the zoomed image
+        zoomContainer.style.display = "flex"; // Show the zoom container
+    }
+}
+
+function closeZoom() {
+    document.querySelectorAll(".zoomContainer").forEach(container => {
+        container.style.display = "none"; // Hide all zoom containers
+    });
+}
+
+
+        function closeStudent() {
+            document.getElementById('studentDetail').style.display = 'none';
+        }
+
+        function filterByCourse() {
+            document.getElementById('filterForm').submit();
+        }
+
+        function updateStatus(status) {
+    console.log("Button clicked, status:", status);
+
+    // Get the processing message element
+    const processingMessage = document.getElementById('processingMessage');
+    const successPopup = document.getElementById('successPopup');
+    const errorPopup = document.getElementById('errorPopup');
+
+    // Show the processing message
+    if (processingMessage) {
+        processingMessage.style.display = 'flex';
+    }
+
+    // Send the AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', `{% url 'update_student_status' %}`, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+
+    xhr.onload = function () {
+        if (processingMessage) {
+            processingMessage.style.display = 'none'; // Hide the processing message
+        }
+
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            // Show the success pop-up
+            if (successPopup) {
+                successPopup.style.display = 'flex';
+                successPopup.querySelector('.textContainer88 p').innerText = response.message;
+                setTimeout(() => {
+                    successPopup.style.display = 'none'; // Hide after 3 seconds
+                }, 2000);
+            }
+            location.reload(); // Reload the page
+
+        } else {
+            var response = JSON.parse(xhr.responseText);
+
+            // Show the error pop-up
+            if (errorPopup) {
+                errorPopup.style.display = 'flex';
+                errorPopup.querySelector('.textContainer88 p').innerText = response.message;
+                setTimeout(() => {
+                    errorPopup.style.display = 'none'; // Hide after 3 seconds
+                }, 3000);
+            }
+        }
+    };
+
+    xhr.onerror = function () {
+        if (processingMessage) {
+            processingMessage.style.display = 'none'; // Hide the processing message
+        }
+
+        // Show the error pop-up
+        if (errorPopup) {
+            errorPopup.style.display = 'flex';
+            errorPopup.querySelector('.textContainer88 p').innerText =
+                'Request failed. Please check your connection and try again.';
+            setTimeout(() => {
+                errorPopup.style.display = 'none'; // Hide after 3 seconds
+            }, 3000);
+        }
+    };
+
+    xhr.send(JSON.stringify({
+        id: currentStudentId,
+        status: status
+    }));
+}
+
+        function fetchStudents(query, course) {
+            const xhr = new XMLHttpRequest();
+            const url = `{% url 'teacherPanel' %}?search=${query}&course=${course}`;
+            
+            xhr.open('GET', url, true);
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.onload = function () {
+                if (this.status >= 200 && this.status < 400) {
+                    const response = JSON.parse(this.responseText);
+                    const listContainer = document.querySelector('.listContainer');
+                    listContainer.innerHTML = '';
+
+                    response.students.forEach(student => {
+                        const studentDiv = document.createElement('div');
+                        studentDiv.className = 'subListContainer';
+
+                        const nameContainer = document.createElement('div');
+                        nameContainer.className = 'nameContainer';
+                        
+                        const subNameContainer = document.createElement('div');
+                        subNameContainer.className = 'subNameContainer';
+                        subNameContainer.innerHTML = `<p>${student.Name}</p>`;
+                        
+                        const averageContainer = document.createElement('div');
+                        averageContainer.className = 'averageContainer';
+                        averageContainer.innerHTML = `
+                            <div class="grades">
+                                <p>Grade avg: <b>${student.AvgGrade}</b></p>
+                            </div>
+                            <div class="grades">
+                                <p>CET avg: <b>${student.AvgCet}</b></p>
+                            </div>
+                        `;
+
+                        nameContainer.appendChild(subNameContainer);
+                        nameContainer.appendChild(averageContainer);
+                        
+                        const viewButtonContainer = document.createElement('div');
+                        viewButtonContainer.className = 'viewButtonContainer';
+                        viewButtonContainer.innerHTML = `
+                        <button class="viewButton" id="student-${student.id}" onclick="showStudent(
+                            ${student.id}, 
+                            '${student.Name}', 
+                            '${student.Email}', 
+                            '${student.AvgGrade}', 
+                            '${student.AvgCet}', 
+                            '${student.Number}', 
+                            '${student.ApplicationNo}', 
+                            '${student.Address}', 
+                            '${student.Course}', 
+                            '${student.ReadingComprehension}', 
+                            '${student.EnglishProficiency}', 
+                            '${student.ScienceProcessSkills}', 
+                            '${student.MathematicalSkills}', 
+                            '${student.AbstractLogicThinkingSkills}', 
+                            '${student.CetPicture}', 
+                            '${student.GradePicture}', 
+                            this
+                        );">View</button>`;
+
+                        studentDiv.appendChild(nameContainer);
+                        studentDiv.appendChild(viewButtonContainer);
+                        
+                        listContainer.appendChild(studentDiv);
+                    });
+                }
+            };
+            xhr.send();
+        }
+
+
+        document.getElementById('searchBar').addEventListener('input', function () {
+            const query = this.value;
+            const course = document.getElementById('courseFilter').value;
+            fetchStudents(query, course);
+        });
+
+        document.getElementById('courseFilter').addEventListener('change', function () {
+            const query = document.getElementById('searchBar').value;
+            const course = this.value;
+            fetchStudents(query, course);
+        });
+
+        function toggleMenu(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+
+<script src="{% static 'js/exploreCourses.js' %}"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>

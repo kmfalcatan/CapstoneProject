@@ -1,0 +1,158 @@
+.popUpMessageContainer{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.534);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 5px;
+}
+
+.popUpMessageContainer1{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.534);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.subPopUpMessageContainer{
+  width: 20rem;
+  border-radius: 0.5rem;
+  background-color: rgb(233,233,233);
+  animation: fadeInScale 0.4s ease-in-out;
+}
+
+.subPopUpMessageContainer1{
+  width: 20rem;
+  height: 20rem;
+  border-radius: 0.5rem;
+  background-color: rgb(233,233,233);
+}
+
+.imageContainer88{
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image88{
+  height: 100%;
+}
+
+.image89{
+  height: 100%;
+  animation: rotate 3s linear infinite;
+}
+
+.textContainer88{
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.buttonContainer88{
+  height: 2.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: right; padding-right: 1rem;
+  gap: 0.5rem;
+}
+
+.button88{
+  height: 2rem;
+  width: 4rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgb(158, 21, 21);
+  color: rgb(233,233,233);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.button88:hover{
+    background-color: transparent;
+    color: rgb(158, 21, 21);
+    border: solid rgb(158, 21, 21) 1px;
+}
+
+.button88:active{
+    transform: scale(0.9);
+}
+
+.button89{
+  height: 2rem;
+  width: 4rem;
+  border: solid rgb(158, 21, 21) 1px;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: rgb(158, 21, 21);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.button89:hover{
+    background-color: rgb(158, 21, 21);
+    color: rgb(233,233,233);
+}
+
+.button89:active{
+    transform: scale(0.9);
+}
+
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  from{
+    transform: rotate(0deg);
+  } to{
+    transform: rotate(-360deg);
+  }
+}
+
+/*tablet*/
+@media only screen and (min-width: 601px) {
+  .subPopUpMessageContainer{
+    width: 30rem;
+  }
+  
+  .subPopUpMessageContainer1{
+    width: 30rem;
+    height: 20rem;
+  }
+
+  .imageContainer88{
+    height: 15rem;
+  }
+}

@@ -1,0 +1,193 @@
+.logoContainer90{
+  height: 10rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo90{
+  height: 100%;
+}
+
+.logoContainer55{
+  height: 20rem;
+  overflow: auto;
+}
+
+.questionsGraphContainer{
+  height: 10rem;
+}
+
+.categoryContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.category1::marker {
+  color: red;
+}
+.category2::marker {
+  color: yellow;
+}
+.category3::marker {
+  color: blue;
+}
+.category4::marker {
+  color: green;
+}
+.category5::marker {
+  color: purple;
+}
+.category6::marker {
+  color: orange;
+}
+.category7::marker {
+  color: grey;
+}
+
+.graphContainer90{
+  height: 10rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.questionsContainer90{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.subQuestionsContainer90{
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.question90{
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  width: 90%;
+}
+
+.text90{
+  color: rgb(72,72,72);
+  width: 100%;
+}
+
+.percent90{
+  width: 5rem;
+  color: rgb(72,72,72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 5px;
+}
+
+.selectCategory{
+  height: 2.5rem;
+  width: 90%;
+  border-radius: 0.5rem;
+  background-color: rgba(72, 72, 72, 0.158);
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.selectCategoryContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subSelectCategoryContainer{
+  background-color: rgba(72, 72, 72, 0.219);
+  height: 2.5rem;
+  width: 90%;
+  padding: 0 0.5rem 0 0.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.15s;
+}
+
+.subSelectCategoryContainer:hover{
+  background-color: rgba(53, 53, 53, 0.452);
+}
+
+.showCategoryContainer{
+  outline: red dashed1 px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem 0 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(72, 72, 72, 0.089);
+}
+
+.showCategory{
+  font-size: 1.2rem;
+  padding: 0 0.5rem 0 0.5rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.showCategory90{
+  font-size: 1.2rem;
+  padding: 0 0.5rem 0 0.5rem;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid rgb(146, 146, 146) 1px;
+  width: 100%;
+}
+
+/*laptop*/
+@media only screen and (min-width: 1025px) and (max-width: 1440px){
+  .logoContainer90{
+    height: 6rem;
+  }
+
+  .questionsGraphContainer{
+    height: 
+    14rem;
+  }
+
+  .logoContainer55{
+    height: 28rem;
+  }
+}

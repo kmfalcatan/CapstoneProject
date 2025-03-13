@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Popup</title>
+  <script src="https://cdn.jsdelivr.net/npm/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <style>
+    /* Popup container */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    /* Popup content */
+    .popup-content {
+      background: #ffffff;
+      padding: 30px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: fadeInScale 0.4s ease-in-out;
+    }
+
+    /* Success message */
+    .popup-content p {
+      font-size: 18px;
+      color: #333;
+      margin: 20px 0 0;
+      font-weight: bold;
+    }
+
+    /* Animations */
+    @keyframes fadeInScale {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Popup Structure -->
+<div id="successPopup" class="popup">
+  <div class="popup-content">
+    <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_ycbes5nb.json" 
+                   background="transparent" 
+                   speed="1" 
+                   style="width: 120px; height: 120px; margin: 0 auto;" 
+                   autoplay>
+    </lottie-player>
+    <p>Successfully Approved!</p>
+  </div>
+</div>
+
+<!-- Trigger Button -->
+<button onclick="showPopup()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; border: none; background-color: #4caf50; color: white; border-radius: 5px;">Approve</button>
+
+<script>
+  function showPopup() {
+    const popup = document.getElementById('successPopup');
+    popup.style.display = 'flex'; // Show the popup
+
+    setTimeout(() => {
+      popup.style.display = 'none'; // Hide after 3 seconds
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
