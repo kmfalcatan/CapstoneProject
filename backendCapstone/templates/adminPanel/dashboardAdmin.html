@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet" href="/Capstone/static/css/dashboardAdmin.css">
+    <link rel="stylesheet" href="{% static 'css/dashboardAdmin.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+        }
+    </style>
+    <style>
+        .SubTableContainer::-webkit-scrollbar{
+  overflow: auto;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  }
+  
+  .SubTableContainer::-webkit-scrollbar-thumb {
+  background-color: rgb(158, 21, 21);
+  }
+ 
+  .SubTableContainer::-webkit-scrollbar-track {
+  background-color: #fff;
+  }
+  
+  /*tablet*/
+  @media only screen and (min-width: 601px){
+    subTableContainer{
+  height: 90%;
+  overflow: auto;
+    }
+  .SubTableContainer::-webkit-scrollbar{
+  overflow: auto;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  }
+  
+  .SubTableContainer::-webkit-scrollbar-thumb {
+  background-color: rgb(158, 21, 21);
+  }
+ 
+  .SubTableContainer::-webkit-scrollbar-track {
+  background-color: #fff;
+  }
+  }
+    </style>
+</head>
+<body style="background-color: rgb(240,240,240);">
+    <div class="container" style="background-color: rgb(240,240,240);">
+        <div class="headerContainer">
+            <div class='menubarContainer' onclick='toggleMenu(this)'>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+            </div>
+        </div>
+
+        <div style="background-color: rgb(240,240,240);" class="subMenubarContainer">
+            <a href="{% url 'dashboardAdmin' %}">
+                <div class="barContainer">
+                    <p>Dashboard</p>
+                </div>
+            </a>
+            
+            <a href="{% url 'adminPanel' %}">
+                <div class="barContainer">
+                    <p>List of teachers</p>
+                </div>
+            </a>
+
+            <a href="{% url 'course' %}">
+                <div class="barContainer">
+                    <p>List of courses</p>
+                </div>
+            </a>
+
+            <a href="{% url 'feedback' %}">
+                <div class="barContainer">
+                    <p>List of feedbacks</p>
+                </div>
+            </a>
+
+            <a href="{% url 'adminSetting' %}">
+                <div class="barContainer">
+                    <p>Settings</p>
+                </div>
+            </a>
+
+            <a href="{% url 'logout' %}">
+                <div class="barContainer1">
+                    <p>Logout</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="filterContainer">
+            <div class="textContainer">
+                <p style="color: rgb(72,72,72);">Dashboard</p>
+            </div>
+        </div>
+
+        <div class="dashboardContainer">
+            <div class="subContainer5">
+                <div class="subDashboardContainer">
+                    <div class="numberContainer">
+                        <div class="nameContainer">
+                            <p>Teachers</p>
+                        </div>
+                        <div class="subNumberContainer">
+                            <p>{{ teacher_count }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="numberContainer">
+                        <div class="nameContainer">
+                            <p>Students</p>
+                        </div>
+                        <div class="subNumberContainer">
+                            <p>{{ student_count }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="numberContainer">
+                        <div class="nameContainer">
+                            <p>Course</p>
+                        </div>
+                        <div class="subNumberContainer">
+                            <p>{{ course_count }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="numberContainer">
+                        <div class="nameContainer">
+                            <p>Feedback</p>
+                        </div>
+                        <div class="subNumberContainer">
+                            <p>{{ feedback_count }}</p>
+                        </div>
+                    </div>                    
+                </div>
+    
+                <div class="graphContainer">
+                    <div class="subGraphContainer">
+                        <div class="nameContainer">
+                            <p>Students who use the system</p>
+                        </div>
+
+                        <div class="graph" style="height: 18rem; width: 100%; align-items: center;">
+                            <canvas id="studentUsageGraph" style="width: 100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tableContainer">
+                <div class="subTableContainer">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Course logo</th>
+                                <th>Course</th>
+                                <th>Approved Students</th>
+                                <th>Declined Students</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                            {% for course, data in table_data.items %}
+                            <tr>
+                                <td>
+                                    <img src="{% static 'img/' %}{{ data.Logo }}" alt="{{ course }} Logo" style="width: 50px; height: auto;">
+                                </td>
+                                <td>{{ course }}</td>
+                                <td>{{ data.Approved }}</td>
+                                <td>{{ data.Declined }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>                                         
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/exploreCourses.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const graphData = JSON.parse('{{ graph_data|escapejs }}');
+
+    const ctx = document.getElementById('studentUsageGraph').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: graphData.years,
+            datasets: [{
+                label: 'Students who used the system',
+                data: graphData.counts,
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                borderColor: 'rgb(255, 255, 255)',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white' 
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.2)' 
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: 'white' 
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.2)' 
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>

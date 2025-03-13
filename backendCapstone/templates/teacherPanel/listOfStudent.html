@@ -1,0 +1,733 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Head Panel</title>
+    <link rel="stylesheet" href="{% static 'css/adminPanel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/exploreCourses.css' %}">
+    <link rel="stylesheet" href="/Capstone/static/css/exploreCourses.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+     
+    <style>
+
+           *{
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+        }
+        .subFilterContainer{
+            height: 7rem;
+        }
+        .size5{
+            display: flex;
+            gap: 1.5rem;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .courseInfoContainer5{
+            height: 20rem;
+        }
+
+        .buttonContainer2{
+            width: 100%;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        .viewButton:hover{
+            color: rgb(72,72,72);
+            border: solid rgb(72,72,72) 1px;
+        }
+
+        .size8{
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .uploadContainer, .subUploadContainer{
+            width: 100%;
+        }
+
+        .upload{
+            width: 90%;
+        }
+
+.zoomContainer{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.534);
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.subZoomContainer{
+    outline: red dashed 1px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.closeButton10{
+    height: 80%;
+    margin-left: 0.5rem;
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.bigPictureContainer{
+    outline: red dashed 1px;
+    height: 92.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+        
+        /*tablet*/
+        @media only screen and (min-width: 601px) and (max-width: 1024px){
+            .subListContainer{
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 1.5rem;
+            }
+        
+            .averageContainer{
+                justify-content: left;
+            }
+        
+            .filterContainer{
+                flex-direction: column;
+            }
+        
+            .subFilterContainer{
+                margin: 0;
+            }
+        
+            .subNameContainer{
+                justify-content: left;
+            }
+        
+            .infoContainer{
+                display: flex;
+                flex-direction: row;
+            }
+
+            .infoContainer3{
+                display: flex;
+                flex-direction: row;
+            }
+
+            .subAddListContainer{
+                width: 70%;
+            }
+
+            .size5{
+                width: 90%;
+                display: flex;
+                gap: 1.5rem;
+                flex-direction: column;
+            }
+
+            .upload{
+                height: 10rem;
+                width: 21rem;
+            }
+        }
+        
+        /*tablet*/
+        @media only screen and (min-width: 1025px){
+            .subListContainer{
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 1.5rem;
+            }
+
+            .upload{
+                height: 10rem;
+                width: 21rem;
+            }
+
+            .size8{
+                flex-direction: row;
+            }
+
+            .size6{
+                display: flex;
+                flex-direction: row;
+            }
+        
+            .averageContainer{
+                justify-content: left;
+            }
+        
+            .subFilterContainer{
+                margin: 0;
+            }
+        
+            .subNameContainer{
+                justify-content: left;
+            }
+        
+            .infoContainer{
+                display: flex;
+                flex-direction: row;
+            }
+
+            .infoContainer3{
+                display: flex;
+                flex-direction: row;
+            }
+
+            .subAddListContainer{
+                width: 70%;
+            }
+
+            .size5{
+                width: 90%;
+                display: flex;
+                gap: 1.5rem;
+                flex-direction: column;
+            }
+        }
+        </style>
+
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            overflow: visible !important;
+            height: auto !important; 
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .tableContainer{
+            display: none;
+        }
+
+        @media print{
+            .menubarContainer{
+                display: none;
+            }
+
+            .subFilterContainer{
+                display: none;
+            }
+
+            .nameContainer, .viewButtonContainer{
+                display: none;
+            }
+
+            .tableContainer{
+                display: block;
+            }
+
+            .listContainer{
+                display: none;
+            }
+
+            .courseInfoContainer5{
+                display: none;
+            }
+        }
+
+        /*Cellphone*/
+        @media only screen and (max-width: 600px){
+        .subAddListContainer{
+            width: 90%;
+            height: 90%;
+            overflow: auto;
+        }
+        }
+    </style>
+</head>
+<body style="background-color: rgb(240,240,240);">
+    <div class="container" style="background-color: rgb(240,240,240);">
+        <div class="headerContainer">
+            <div class='menubarContainer' onclick='toggleMenu(this)'>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+            </div>
+
+            <div>
+                <p style="font-weight: bold; font-size: 1.1rem; color: rgb(72,72,72);">{{ teacher_course }}</p>
+            </div>
+        </div>
+
+        <div style="background-color: rgb(240,240,240); z-index: 100;" class="subMenubarContainer">
+            <a href="{% url 'dashboardTeacher' %}">
+                <div class="barContainer">
+                    <p>Dashboard</p>
+                </div>
+            </a>
+            
+            <a href="{% url 'teacherPanel' %}">
+                <div class="barContainer">
+                    <p>List of students</p>
+                </div>
+            </a>
+
+            <a href="{% url 'approved_students' %}">
+                <div class="barContainer">
+                    <p>Approve</p>
+                </div>
+            </a>
+
+            <a href="{% url 'teacherCourses' %}">
+                <div class="barContainer">
+                    <p>Courses</p>
+                </div>
+            </a>
+    
+            <a href="{% url 'setting' %}">
+                <div class="barContainer">
+                    <p>Setting</p>
+                </div>
+            </a>
+
+            <a href="{% url 'logout' %}">
+                <div class="barContainer1">
+                    <p>Logout</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="filterContainer">
+            <div class="textContainer">
+                <p style="color: rgb(72,72,72);" id="pageTitle">Approved Student</p>
+            </div>
+        
+            <div class="subFilterContainer">
+                <button type="button" id="printButton" class="printButton filter" onclick="printStudentList()" style="box-shadow: none; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;padding: 0 0.5rem 0 0.5rem;">
+                    Print List<img style="height: 1.2rem;" src="{% static 'img/printer.svg' %}" alt="">
+                </button>
+                
+                <a href="{% url 'approved_studentsDeclined' %}"><button class="printButton filter" style="padding: 0 0.5rem 0 0.5rem; box-shadow: none; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;">See Declined Student<img style="height: 1.2rem;" src="{% static 'img/eye (1).svg' %}" alt=""></button></a>
+                
+                <input style="box-shadow: none;" class="searchBar" type="text" name="search" id="searchBar" placeholder="Search..." value="{{ search_query }}">
+                <button type="submit" style="display: none;"></button>
+            </div>
+        </div>
+        
+
+        <div id="studentListContainer" class="courseContainer5" style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 0;">
+            
+        </div>
+    </div>
+
+    <div class="addListContainer" style="display: none; position: fixed;">
+        <div class="addListContainer">
+            <div class="subAddListContainer" style="background-color: none;">
+                <div class="closeContainer" style="margin-bottom: 1.5rem;">
+                    <div class="subCloseContainer">
+                        <img onclick="addlist()" class="closeButton8" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                    </div>
+
+                    <div style="
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.6rem;
+                    font-weight: bold;
+                    padding-right: 2.5rem;">
+                        <p>Student information</p>
+                    </div>
+                </div>
+                
+                <div class="infoContainer3" style="display: flex; flex-direction: column;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tableContainer">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Grade Average</th>
+                <th>CET Average</th>
+                <th>Email</th>
+                <th>Application No.</th>
+                <th>Number</th>
+                <th>Address</th>
+                <th>Course</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if students %}
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.Name }}</td>
+                        <td>{{ student.AvgGrade }}</td>
+                        <td>{{ student.AvgCet }}</td>
+                        <td>{{ student.Email }}</td>
+                        <td>{{ student.ApplicationNo }}</td>
+                        <td>{{ student.Number }}</td>
+                        <td>{{ student.Address }}</td>
+                        <td>{{ student.Course }}</td>
+                        <td>{{ student.Status }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="9">No students found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<div class="zoomContainer cet" style="display: none;">
+    <div class="subZoomContainer">
+        <img onclick="zoomCet()" class="closeButton10" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+    </div>
+
+    <div class="bigPictureContainer">
+        <img src="" class="subBigPictureContainer" style="max-height: 90%; max-width: 90%;" alt="">
+    </div>
+</div>
+
+<div class="zoomContainer grade" style="display: none;">
+    <div class="subZoomContainer">
+        <img onclick="zoomGrade()" class="closeButton10" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+    </div>
+
+    <div class="bigPictureContainer">
+        <img src="" class="subBigPictureContainer" style="max-height: 90%; max-width: 90%;" alt="">
+    </div>
+</div>
+
+<!-- Custom confirmation popup for delete -->
+<div class="popUpMessageContainer1" id="confirmDeletePopup" style="display: none;">
+    <div class="subPopUpMessageContainer">
+        <div class="imageContainer88">
+            <img class="image88" src="{% static 'img/SL-050620-30640-23-removebg-preview.png' %}" alt="">
+        </div>
+
+        <div class="textContainer88">
+            <p>Are you sure you want to delete this student?</p>
+        </div>
+
+        <div class="buttonContainer88">
+            <button class="button88">Yes</button>
+            <button class="button89">No</button>
+        </div>
+    </div>
+</div>
+
+<!-- Success message after student is deleted -->
+<div class="popUpMessageContainer1" id="successPopup" style="display: none;">
+    <div class="subPopUpMessageContainer">
+        <div class="imageContainer88">
+            <img class="image88" src="{% static 'img/rb_1749.png' %}" alt="">
+        </div>
+
+        <div class="textContainer88" style="margin-bottom: 1rem;">
+            <p>Student deleted successfully</p> <!-- This text will be updated dynamically -->
+        </div>
+    </div>
+</div>
+
+<!-- Error message popup -->
+<div class="popUpMessageContainer1" id="errorPopup" style="display: none;">
+    <div class="subPopUpMessageContainer">
+        <div class="imageContainer88">
+            <img class="image88" src="{% static 'img/rb_3505.png' %}" alt="">
+        </div>
+
+        <div class="textContainer88" style="margin-bottom: 1rem;">
+            <p>An error occurred. Please try again.</p> <!-- This text will be updated dynamically -->
+        </div>
+    </div>
+</div>
+
+    <script src="{% static 'js/exploreCourses.js' %}"></script>
+
+    <script>
+
+        function zoomCet() {
+            const container = document.querySelector('.cet');
+            container.style.display = container.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function zoomGrade() {
+            const container = document.querySelector('.grade');
+            container.style.display = container.style.display === 'none' ? 'flex' : 'none';
+        }
+        
+  function showPopup() {
+    const popup = document.getElementById('successPopup');
+    popup.style.display = 'flex'; 
+
+    setTimeout(() => {
+      popup.style.display = 'none'; 
+    }, 2000);
+  }
+
+       document.getElementById('searchBar').addEventListener('input', filterStudents);
+
+function filterStudents() {
+    var search = document.getElementById('searchBar').value;
+
+    $.ajax({
+        url: '{% url "fetch_students" %}',
+        data: {
+            'search': search  
+        },
+        success: function(response) {
+            updateStudentList(response.students);
+        }
+    });
+}
+
+function updateStudentList(students) {
+    var container = document.getElementById('studentListContainer');
+    container.innerHTML = '';
+
+    if (students.length > 0) {
+        students.forEach(function(student, index) {
+            var div = document.createElement('div');
+            div.className = ' subCourse';
+            div.innerHTML = `
+            <div class="subCourseContainer5">
+                <div class="courseInfoContainer5">
+                    <div class="logoContainer5" style='border-bottom: solid rgb(224, 224, 224) 1px;'>
+                        <img 
+                            style='filter: invert(1);'
+                            class="logo5" 
+                            src="{% static 'img/person (1).svg' %}" 
+                            alt="{{ course.Course|escape }}">
+                    </div>
+                    
+                    <div class="courseNameContainer5" style='height: 2.7rem;'>
+                        <p class="courseName5" style="width: 100%;">${student.Name}</p>
+                    </div>
+
+                    <div class="averageContainer" style='justify-content: center;'>
+                        <div class="grades" style=' color: rgb(72,72,72);'>
+                            <p>Grade avg: ${student.AvgGrade}</p>
+                        </div>
+                        <div class="grades" style=' color: rgb(72,72,72);'>
+                            <p>CET avg: ${student.AvgCet}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="viewButtonContainer" style='display: flex; gap: 0.5rem;'>
+                        <button style='box-shadow: none; color: rgb(72,72,72); margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;' onclick="showStudentDetails(${index})" class="viewButton">View<img class="imgHover" style="height: 1.2rem;" src="{% static 'img/eye.svg' %}" alt=""></button>
+                        <button style='box-shadow: none; color: rgb(72,72,72); margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;' class="viewButton" onclick="deleteStudent(${student.id}, this.closest('tr'))">Delete<img class="imgHover" style="height: 1.2rem;" src="{% static 'img/trash.svg' %}" alt=""></button>
+                    </div>
+            `;
+            container.appendChild(div);
+            div.dataset.studentInfo = JSON.stringify(student);
+        });
+    } else {
+        container.innerHTML = '<p>No students found.</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    filterStudents();
+});
+
+function showStudentDetails(index) {
+    var studentDivs = document.querySelectorAll('#studentListContainer > div');
+    var studentDiv = studentDivs[index]; 
+    var student = JSON.parse(studentDiv.dataset.studentInfo);
+
+    document.querySelector('.addListContainer .infoContainer3').innerHTML = `
+        <div class="uploadContainer">
+            <div class="subUploadContainer">
+                <div class="upload" onclick="zoomImage('/media/${student.CetPicture}')">
+                    <img class="picture4" id="cetImage" src="/media/${student.CetPicture}" alt="CET Image">
+                </div> 
+            </div>
+
+            <div class="subUploadContainer">
+                <div class="upload" onclick="zoomImage('/media/${student.GradePicture}')">
+                    <img class="picture4" id="gradeImage" src="/media/${student.GradePicture}" alt="Grade Image">
+                </div>
+            </div>
+        </div>  
+
+        <div class="size8">
+            <div class="size5">
+                <div class="subInfoContainer" style="flex-direction: column;">
+                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Name:</p>
+                    <div class="info" style="min-height: 3rem;">
+                        <p>${student.Name}</p>
+                    </div>
+                </div>
+                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1.5rem;">
+                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Email:</p>
+                    <div class="info" style="min-height: 3rem;">
+                        <p>${student.Email}</p>
+                    </div>
+                </div>
+                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1.5rem;">
+                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Grade average:</p>
+                    <div class="info" style="min-height: 3rem;">
+                        <p>${student.AvgGrade}</p>
+                    </div>
+                </div>
+                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1.5rem;">
+                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">CET average:</p>
+                    <div class="info" style="min-height: 3rem;">
+                        <p>${student.AvgCet}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="size5">
+                <div class="subInfoContainer" style="flex-direction: column;">
+                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Contact No.:</p>
+                    <div class="info" style="min-height: 3rem;">
+                        <p>${student.Number}</p>
+                    </div>
+                </div>
+                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1.5rem;">
+                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Application No.:</p>
+                    <div class="info" style="min-height: 3rem;">
+                        <p>${student.ApplicationNo}</p>
+                    </div>
+                </div>
+                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1.5rem;">
+                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Address:</p>
+                    <div class="info" style="min-height: 3rem;">
+                        <p>${student.Address}</p>
+                    </div>
+                </div>
+                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1.5rem;">
+                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Course:</p>
+                    <div class="info" style="min-height: 3rem;">
+                        <p>${student.Course}</p>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    `;
+    document.querySelector('.addListContainer').style.display = 'block';
+}
+
+function zoomImage(imageSrc) {
+    document.querySelector('.bigPictureContainer .subBigPictureContainer').src = imageSrc;
+    document.querySelector('.zoomContainer').style.display = 'block';
+    document.querySelector('.zoomContainer').style.position = 'fixed';
+}
+
+function closeZoom() {
+    document.querySelector('.zoomContainer').style.display = 'none';
+}
+
+function updateTitle(status) {
+    document.getElementById('pageTitle').innerText = 'List of Students - ' + status;
+}
+
+function printStudentList() {
+    
+    window.print();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var select = document.getElementById('statusFilter');
+    select.addEventListener('change', filterStatus);
+
+    filterStatus();
+});
+function deleteStudent(studentId, rowElement) {
+    const confirmDeletePopup = document.getElementById('confirmDeletePopup');
+    const successPopup = document.getElementById('successPopup');
+    const errorPopup = document.getElementById('errorPopup'); // Error popup in case needed
+
+    if (confirmDeletePopup) {
+        confirmDeletePopup.style.display = 'flex'; // Show the custom confirmation popup
+        const yesButton = confirmDeletePopup.querySelector('.button88');
+        const noButton = confirmDeletePopup.querySelector('.button89');
+
+        yesButton.onclick = function() {
+            // Proceed with deletion if the user confirms
+            $.ajax({
+                type: 'POST',
+                url: '{% url "delete_student" %}', 
+                data: {
+                    'student_id': studentId,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' 
+                },
+                success: function(response) {
+                    if (response.success) {
+                        if (successPopup) {
+                            successPopup.style.display = 'flex'; // Show success message
+                            successPopup.querySelector('.textContainer88 p').innerText = response.message;
+                            setTimeout(() => {
+                                successPopup.style.display = 'none'; // Hide after 3 seconds
+                            }, 3000);
+                        }
+                        location.reload();
+                        
+                        rowElement.remove(); // Remove the deleted row from the table
+                    } else {
+                        if (errorPopup) {
+                            errorPopup.style.display = 'flex'; // Show error message
+                            errorPopup.querySelector('.textContainer88 p').innerText = response.message;
+                            setTimeout(() => {
+                                errorPopup.style.display = 'none'; // Hide after 3 seconds
+                            }, 3000);
+                        }
+                    }
+                },
+                error: function() {
+                    if (errorPopup) {
+                        errorPopup.style.display = 'flex'; // Show error message
+                        errorPopup.querySelector('.textContainer88 p').innerText = 
+                            'An error occurred. Please try again.';
+                        setTimeout(() => {
+                            errorPopup.style.display = 'none'; // Hide after 3 seconds
+                        }, 3000);
+                    }
+                }
+            });
+
+            confirmDeletePopup.style.display = 'none'; // Hide the confirmation popup after action
+        };
+
+        noButton.onclick = function() {
+            confirmDeletePopup.style.display = 'none'; // Hide the confirmation popup if user cancels
+        };
+    }
+}
+
+    </script>
+</body>
+</html>

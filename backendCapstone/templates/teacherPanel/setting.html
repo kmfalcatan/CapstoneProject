@@ -1,0 +1,424 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Head Panel</title>
+    <link rel="stylesheet" href="{% static 'css/setting.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+        }
+    </style>
+    
+    <style>
+        .subAddListContainer{
+            height: 90%; 
+            overflow-x: hidden; 
+            overflow-y: auto;
+        }
+        .size6{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-direction: column;
+            width: 100%;
+            height: 40rem;
+        }
+
+        .size5{
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .buttonContainer2{
+            width: 100%;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+        /*tablet*/
+        @media only screen and (min-width: 601px){
+        
+            .subFilterContainer{
+                flex-direction: row;
+            }
+
+            .size6{
+                display: flex;
+                flex-direction: row;
+                width: 95%;
+                height: 100%;
+            }
+        
+            .averageContainer{
+                justify-content: left;
+            }
+        
+            .filterContainer{
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1rem;
+            }
+        
+            .subFilterContainer{
+                margin: 0;
+            }
+        
+            .subNameContainer{
+                justify-content: left;
+            }
+        
+            .infoContainer{
+                display: flex;
+                flex-direction: row;
+            }
+
+            .infoContainer3{
+                display: flex;
+                flex-direction: column;
+                height: 90%;
+            }
+
+            .infoContainer4{
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            .subAddListContainer{
+                width: 70%;
+                height: 28rem;
+                overflow: hidden;
+            }
+
+            .size5{
+                width: 90%;
+                display: flex;
+                gap: 1rem;
+                flex-direction: column;
+            }
+
+            .size6{
+                width: 100%;
+                height: 22rem;
+            }
+        }
+
+/*Cellphone*/
+@media only screen and (max-width: 600px){
+.subAddListContainer, .subLoginFormContainer{
+    width: 90%;
+    overflow: auto;
+}
+}
+        </style>
+</head>
+<body>
+    <div class="container" style="background-color: rgb(240,240,240);">
+        <div class="headerContainer">
+            <div class='menubarContainer' onclick='toggleMenu(this)'>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+            </div>
+
+            <div>
+                <p style="font-weight: bold; font-size: 1.1rem; color: rgb(72,72,72);">{{ teacher_course }}</p>
+            </div>
+        </div>
+
+        <div style="background-color: rgb(240,240,240);" class="subMenubarContainer">
+            <a href="{% url 'dashboardTeacher' %}">
+                <div class="barContainer">
+                    <p>Dashboard</p>
+                </div>
+            </a>
+            
+            <a href="{% url 'teacherPanel' %}">
+                <div class="barContainer">
+                    <p>List of students</p>
+                </div>
+            </a>
+            <a href="{% url 'approved_students' %}">
+                <div class="barContainer">
+                    <p>Approve</p>
+                </div>
+            </a>
+            <a href="{% url 'teacherCourses' %}">
+                <div class="barContainer">
+                    <p>Courses</p>
+                </div>
+            </a>
+            <a href="{% url 'setting' %}">
+                <div class="barContainer">
+                    <p>Settings</p>
+                </div>
+            </a>
+
+            <a href="{% url 'logout' %}">
+                <div class="barContainer1">
+                    <p>Logout</p>
+                </div>
+            </a>
+        </div>
+
+        <div style="outline: none;" class="subContainer">
+            <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="addlist()">
+                <div style="outline: none;" class="subSettingContainer">
+                    <img class="person" src="{% static 'img/image-removebg-preview1.png' %}" alt="">
+                </div>
+                <div style="outline: none;" class="textContainer4">
+                    <p>Profile</p>
+                </div>
+            </div>
+
+            <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="login()">
+                <div style="outline: none;" class="subSettingContainer">
+                    <img class="person" src="{% static 'img/image-removebg-preview (2).png' %}" alt="">
+                </div>
+                <div style="outline: none; " class="textContainer4">
+                    <p>Change password</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loginFormContainer" style="display: none;">
+        <div class="loginFormContainer">
+            <div class="subLoginFormContainer">
+                <div class="closeContainer">
+                    <div class="subCloseContainer">
+                        <img onclick="login()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                    </div>
+                    <div class="loginTextContainer">
+                        <p>Change password</p>
+                    </div>
+                </div>
+                <form method="POST" action="{% url 'setting' %}">
+                    {% csrf_token %}
+                    <div class="inputContainer">
+                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your old password:</p>
+                            <input class="inputEmail" type="password" name="old_password" placeholder="Enter your old password:" required>
+                        </div>
+                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your new password:</p>
+                            <input class="inputEmail" type="password" name="new_password" placeholder="Enter your new password:" required>
+                        </div>
+                        <div class="subInputContainer">
+                            <button type="submit" class="loginButton1">Save</button>
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="addListContainer" style="display: none;">
+        <div class="addListContainer">
+            <div class="subAddListContainer">
+                <div class="closeContainer">
+                    <div class="subCloseContainer">
+                        <img onclick="addlist()" class="closeButton" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                    </div>
+                    <div class="loginTextContainer">
+                        <p>Profile</p>
+                    </div>
+                </div>
+
+                <div class="infoContainer3">
+                    <div class="size6">
+                        <div class="size5">
+                            <div class="subInfoContainer" style="flex-direction: column;">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Name:</p>
+                                <div class="info" required style="min-height: 3rem;">
+                                    <p>{{ teacher.Name }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Email:</p>
+                                <div class="info" required style="min-height: 3rem;">
+                                    <p>{{ teacher.Email }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Rank:</p>
+                                <div class="info" required style="min-height: 3rem;">
+                                    <p>{{ teacher.Rank }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Designation:</p>
+                                <div class="info" required style="min-height: 3rem;">
+                                    <p>{{ teacher.Designation }}</p>
+                                </div>
+                            </div>   
+                        </div>
+    
+                        <div class="size5">
+                            <div class="subInfoContainer" style="flex-direction: column;">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Contact No.:</p>
+                                <div class="info1" style="min-height: 3rem;">
+                                    <p>{{ teacher.Number }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Address</p>
+                                <div class="info1" style="min-height: 3rem;">
+                                    <p>{{ teacher.Address }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">College:</p>
+                                <div class="info1" style="min-height: 3rem;">
+                                    <p>{{ teacher.College }}</p>
+                                </div>
+                            </div>
+        
+                            <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Course:</p>
+                                <div class="info1" style="min-height: 3rem;">
+                                    <p>{{ teacher.Course }}</p>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="buttonContainer2" style="height: 3rem;">
+                        <button class="button1" onclick="addlist1()">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="addListContainer1" style="display: none;">
+        <div class="addListContainer" style="background-color: none;">
+            <div class="subAddListContainer">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="closeContainer">
+                        <div class="subCloseContainer">
+                            <img onclick="addlist1()" class="closeButton" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                        </div>
+                        <div class="loginTextContainer">
+                            <p>Edit profile</p>
+                        </div>
+                    </div>
+                    <div class="infoContainer4">
+                        <div class="size6">
+                            <div class="size5">
+                                <div class="subInfoContainer" style="flex-direction: column;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Name:</p>
+                                    <input style="min-height: 3rem;" type="text" name="Name" class="info" required value="{{ teacher.Name }}" placeholder="Enter Name">
+                                </div>
+
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Email:</p>
+                                    <input style="min-height: 3rem;" type="email" name="Email" class="info" required value="{{ teacher.Email }}" placeholder="Enter Email">
+                                </div>
+
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Rank:</p>
+                                    <select style="min-height: 3rem;" class="info" required name="Rank">
+                                        <option value="{{ teacher.Rank }}">{{ teacher.Rank }}</option>
+                                        <option value="Instructor">Instructor</option>
+                                        <option value="Assistant Professor">Assistant Professor</option>
+                                        <option value="Associate Professor">Associate Professor</option>
+                                        <option value="Professor">Professor</option>
+                                    </select>
+                                </div>
+
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Designation:</p>
+                                    <input style="min-height: 3rem;" type="text" name="Designation" class="info" required value="{{ teacher.Designation }}" placeholder="Enter Designation">
+                                </div>  
+                            </div>
+
+                            <div class="size5">
+                                <div class="subInfoContainer" style="flex-direction: column;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Contact No.:</p>
+                                    <input style="min-height: 3rem;" type="text" name="Number" class="info" required value="{{ teacher.Number }}" placeholder="Enter Email">
+                                </div>
+
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Address:</p>
+                                    <input style="min-height: 3rem;" type="text" name="Address" class="info" required value="{{ teacher.Address }}" placeholder="Enter Email">
+                                </div>
+
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">College:</p>
+                                    <input style="min-height: 3rem;" disabled type="text" name="College" class="info" required value="{{ teacher.College }}" placeholder="Enter Email">
+                                </div>
+
+                                <div class="subInfoContainer" style="flex-direction: column; margin-top: 1rem;">
+                                    <p style="width: 100%; justify-content: left; padding-left: 2rem;">Course:</p>
+                                    <input style="min-height: 3rem;" disabled type="text" name="Course" class="info1" value="{{ teacher.Course }}" placeholder="Enter Course">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="buttonContainer2" style="height: 3rem;">
+                            <button type="submit" class="button1">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="popUpMessageContainer1" id="successPopup4" style="display: none;">
+        <div class="subPopUpMessageContainer1">
+            <div class="textContainer88" style="height: 20rem; align-items: center; justify-content: center; display: flex;">
+                <p id="popupMessage"></p> <!-- Added ID to dynamically insert message -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="{% static 'js/exploreCourses.js' %}"></script>
+    <script src="{% static 'js/loginForm.js' %}"></script>
+    
+    <script>
+        function showPopup(message) {
+            const popup = document.getElementById('successPopup4'); 
+            const messageText = document.getElementById('popupMessage'); 
+    
+            if (popup && messageText) {
+                messageText.innerText = message; // Set message
+                popup.style.display = 'flex'; // Show popup
+    
+                setTimeout(() => {
+                    popup.style.display = 'none'; // Hide after 2 seconds
+                }, 2000);
+            }
+        }
+    
+        // Check for Django messages and display the popup
+        {% if messages %}
+            {% for message in messages %}
+                showPopup("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+    
+</body>
+</html>

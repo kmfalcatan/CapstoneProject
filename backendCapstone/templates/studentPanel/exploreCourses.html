@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Panel</title>
+
+    <link rel="stylesheet" href="{% static 'css/exploreCourses.css' %}">
+    <link rel="stylesheet" href="/Capstone/static/css/exploreCourses.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+        }
+
+        .subCourseContainer5{
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+        .subCourseContainer5:hover{
+            transform: scale(1.05);
+        }
+
+.barContainer:hover{
+    background-color: rgb(90, 13, 13);
+    color: rgb(233,233,233);
+}
+    </style>
+    <style>
+        
+        /*laptop*/
+        @media only screen and (min-width: 1025px){
+            .infoContainer5{
+                height: 35.3rem;
+            }
+        }
+
+         /*Cellphone*/
+         @media only screen and (max-width: 600px){
+            .subCollegeContainer1{
+                width: 90%;
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+<body style="background-color: rgb(240,240,240);">
+    <div class="container" style="background-color: rgb(240,240,240);">
+        <div class="backgroundContainer99">
+            <div class="textContainer99">
+                <p>List of courses</p>
+            </div>
+
+            <div class="boxContainer99">
+                <div class="titleContainer99">
+                    <p>Course</p>
+                </div>
+
+                <div class="descriptionContainer99">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde magni esse, autem soluta adipisci quos laudantium asperiores ab nihil fugiat ex eveniet reprehenderit a numquam! Consequuntur dolores accusamus velit aspernatur?</p>
+                </div>
+
+                <div class="collegeContainer">
+                    <div class="subCollegeContainer">
+                        <p onclick="showAllCourses()">All</p>
+                    </div>
+        
+                    <select class="subCollegeContainer1" name="" id="collegeSelect" onchange="filterCourses()">
+                        <option value="all">Choose a college</option>
+                        {% for college in colleges %}
+                        <option value="{{ college|escapejs }}">{{ college|escape }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="headerContainer">
+            <div class='menubarContainer' onclick='toggleMenu(this)'>
+                <div class='line' style="border: solid white 2px;"></div>
+                <div class='line' style="border: solid white 2px;"></div>
+                <div class='line' style="border: solid white 2px;"></div>
+            </div>
+        </div>
+
+        <div class="subMenubarContainer" style="background-color: rgb(240,240,240);">
+            <a href="{% url 'logout' %}">
+                <div class="barContainer">
+                    <p>Back</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="courseContainer5" style="display: flex; flex-wrap: wrap; gap: 1rem; width: 100%;">
+            {% for course in courses %}
+            <div class="subCourseContainer5 subCourse" onclick="showCourseInfo(
+                '{{ course.Course|escapejs }}', 
+                '{{ course.CourseDescription|escapejs }}', 
+                '{{ course.College|escapejs }}', 
+                '{{ course.AvgGrade }}', 
+                '{{ course.AvgCet }}', 
+                '{% static 'img/' %}{{ course.MainLogo|escapejs }}'
+            )"  data-college="{{ course.College|escapejs }}">
+                <div class="courseInfoContainer5">
+                    <div class="logoContainer5">
+                        <img  
+                            class="logo5" 
+                            src="{% static 'img/' %}{{ course.Logo|escapejs }}" 
+                            alt="{{ course.Course|escape }}">
+                    </div>
+
+                    <div class="courseNameContainer5">
+                        <p class="courseName5" style="width: 100%;">{{ course.College|escape }}</p>
+                    </div>
+
+                    <div class="viewContainer5">
+                        <button style="margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;"
+                            onclick="showCourseInfo(
+                                '{{ course.Course|escapejs }}', 
+                                '{{ course.CourseDescription|escapejs }}', 
+                                '{{ course.College|escapejs }}', 
+                                '{{ course.AvgGrade }}', 
+                                '{{ course.AvgCet }}', 
+                                '{% static 'img/' %}{{ course.MainLogo|escapejs }}'
+                            )" 
+                            class="viewButton5"
+                        >
+                            Learn more<img style="height: 1.2rem;" src="{% static 'img/eye.svg' %}" alt="">
+                        </button>
+
+                        <div class="learnContainer">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet at doloremque quis minima accusamus impedit ex, suscipit sapiente odit consequatur fugiat consectetur culpa possimus dolorem nam. Laborum exercitationem esse modi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div id="courseInfoModal" class="closeOpen5" style="display: none;">
+        <div class="subCourseInfoContainer5">
+            <div class="infoContainer5" >
+                <div class="textContainer5">
+                    <p>Course Information</p>
+                </div>
+
+                <div class="rotate">
+                    <div class="logoContainer6">
+                        <img style="max-width: 70%;" id="courseLogo" class="logo6" src="" alt="Course Logo">
+
+                        <div class="background">
+                            
+                        </div>
+                    </div>
+
+                    <div class="information">
+                        <div class="descriptionContainer5">
+                            <div class="labelContainer">
+                                <p>College:</p>
+                            </div>
+                            <div class="description6">
+                                <p id="college"></p>
+                            </div>
+                        </div>
+            
+                        <div class="descriptionContainer5">
+                            <div class="labelContainer">
+                                <p>Course:</p>
+                            </div>
+                            <div class="description6">
+                                <p id="courseName"></p>
+                            </div>
+                        </div>
+
+                        <div class="average">
+                            <div class="descriptionContainer5">
+                                <div class="labelContainer">
+                                    <p>Grade Average:</p>
+                                </div>
+                                <div class="description6">
+                                    <p id="avgGrade"></p>
+                                </div>
+                            </div>
+
+                            <div class="descriptionContainer5">
+                                <div class="labelContainer">
+                                    <p>CET Average:</p>
+                                </div>
+                                <div class="description6">
+                                    <p id="avgCet"></p>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="descriptionContainer5">
+                            <div class="labelContainer">
+                                <p>Description:</p>
+                            </div>
+                            <div class="description5" style="height: 8rem; overflow: auto;">
+                                <p id="courseDescription"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="closeContainer5">
+                    <button onclick="closeCourseInfo()" class="closeButton5">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/exploreCourses.js' %}"></script>
+    <script>
+        function filterCourses() {
+            const selectedCollege = document.getElementById('collegeSelect').value;
+            const courses = document.querySelectorAll('.subCourse');
+
+            courses.forEach(course => {
+                if (selectedCollege === 'all' || course.getAttribute('data-college') === selectedCollege) {
+                    course.style.display = 'block';
+                } else {
+                    course.style.display = 'none';
+                }
+            });
+        }
+
+        function showAllCourses() {
+            const courses = document.querySelectorAll('.subCourse');
+            courses.forEach(course => course.style.display = 'block');
+            document.getElementById('collegeSelect').value = 'all';
+        }
+
+        function showCourseInfo(courseName, courseDescription, college, avgGrade, avgCet, logoSrc) {
+            selectedCourse = courseName; 
+            document.getElementById('courseName').innerText = courseName;
+            document.getElementById('courseDescription').innerText = courseDescription;
+            document.getElementById('college').innerText = college;
+            document.getElementById('avgGrade').innerText = avgGrade;
+            document.getElementById('avgCet').innerText = avgCet;
+
+            document.getElementById('courseLogo').src = logoSrc;
+
+            document.getElementById('courseInfoModal').style.display = 'block';
+            document.getElementById('courseInput').value = courseName; 
+        }
+
+        function closeCourseInfo() {
+            document.getElementById('courseInfoModal').style.display = 'none';
+        }
+
+        function closeAddListForm() {
+            document.getElementById('addToListForm').style.display = 'none';
+            clearForm();
+        }
+
+        function clearForm() {
+            const form = document.getElementById('addListForm');
+            form.reset(); 
+            document.getElementById('courseInput').value = selectedCourse; 
+        }
+
+        function viewCourse(courseName) {
+            document.getElementById('courseInput').value = courseName;
+        }
+
+        function submitAddToList() {
+            const form = document.getElementById('addListForm');
+            const formData = new FormData(form);
+
+            const selectedCourse = document.getElementById('courseInput').value;
+            formData.append('course', selectedCourse); 
+
+            fetch('{% url "exploreCourses" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message);  
+                    closeAddListForm(); 
+                } else {
+                    alert('Please input all the information.');  
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.'); 
+            });
+        }
+    </script>
+</body>
+</html>

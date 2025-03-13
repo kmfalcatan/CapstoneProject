@@ -1,0 +1,423 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/loginForm.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link rel="stylesheet" href="/Capstone/static/css/landingPage.css">
+    <link rel="stylesheet" href="{% static 'css/landingPage.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+        }
+
+        .subLandingContainer{
+            height: 80%;
+            width: 80%;
+            border-radius: 1rem;
+            background: url("{% static 'img/blob-scene-haikei.svg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.301);
+        }
+
+        .loginButton77{
+            color: white;
+            cursor: pointer;
+            transition: all 0.15s;
+            height: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem 0 1rem;
+            border-radius: 0.5rem;
+            background-color: rgb(217,129,123);
+            border: solid rgb(212, 118, 112) 1px;
+            }
+    </style>
+    <style>
+        .container {
+            background: url("{% static 'img/Green Watercolor Weekly Schedule Instagram Story.png' %}") center/cover no-repeat;
+        }
+
+        
+        /*Cellphone*/
+        @media only screen and (max-width: 600px){
+            .subLoginFormContainer{
+                width: 90%;
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landingContainer">
+        <div class="subLandingContainer">
+            <div class="headerContainer77">
+                <div class="subHeaderContainer77">
+                    <img class="logo77" src="{% static 'img/wmsuLogo.png' %}" alt="">
+                    <p class="logoName77">Western Mindanao State University</p>
+                </div>
+
+                <div class="subHeaderContainer77">
+                    <p style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.125);" onclick="document.querySelector('.loginFormContainer').style.display = 'block';" class="loginButton77">Login</p>
+                </div>
+            </div>
+
+            <div class="landing">
+                <div class="textContainer77">
+                    <p class="text77">Determine what you love doing </p>
+                </div>
+
+                <div class="textContainer77">
+                    <p class="text78">Struggling to find a course that aligns with your learning style?  Answer a few simple personality questions.</p>
+                </div>
+
+                <div class="buttonContainer77">
+                    <button class="loginButton79" onclick="generateStudentID()">Take Quiz</button>
+
+                    <a href="{% url 'exploreCourses' %}">
+                        <button class="loginButton79">Explore course</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <div class="container">
+        <div class="subContainer">
+            <div class="headerContainer">
+                <div class="loginContainer" style="margin-right: 1rem;">
+                    <p onclick="document.querySelector('.loginFormContainer').style.display = 'block';" class="loginButton">Login</p>
+                </div>
+            </div>
+            <div class="bodyContainer" style="height: 85%;">
+                <div class="subBodyContainer">
+                    <div class="navContainer">
+                        <div class="pictureContainer">
+                            <img class="picture" src="{% static 'img/ab07790f-1557-4f94-a416-1b58d998b731.jfif' %}" alt="">
+                        </div>
+                        <div class="textContainer">
+                            <p>Find the Perfect Course for You</p>
+                        </div>
+                        <div class="buttonContainer">
+                            <a href="{% url 'exploreCourses' %}">
+                                <button class="button1">Explore Course</button>
+                            </a>
+                            
+                            <button class="button1" onclick="generateStudentID()">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="loginFormContainer" style="display: none;">
+        <div class="loginFormContainer" style="background-color: transparent;">
+            <div class="subLoginFormContainer">
+                <div class="closeContainer">
+                    <div class="subCloseContainer">
+                        <img onclick="login()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                    </div>
+                    <div class="loginTextContainer">
+                        <p>Login</p>
+                    </div>
+                </div>
+                <div class="inputContainer">
+                    <form style="width: 100%;" method="post" action="{% url 'loginForm' %}">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="subInputContainer" style="flex-direction: column;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Email:</p>
+                            <input class="inputEmail" style="width: 90%;" type="email" name="email" required>
+                        </div>
+
+                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Password:</p>
+                            <input class="inputEmail" style="width: 90%;"  type="password" name="password" required>
+                        </div>
+
+                        <div class="subInputContainer" style="height: 1rem; justify-content: left;">
+                            <p onclick="forgot()" class="forgotContainer" style="padding-left: 1rem;">Forgot password?</p>
+                        </div>
+
+                        <div class="subInputContainer">
+                            <button class="loginButton1" type="submit">Login</button>
+                        </div>
+                    </form>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loginFormContainer forgot" style="display: none;">
+        <div class="loginFormContainer" style="background-color: transparent;">
+            <div class="subLoginFormContainer">
+                <div class="closeContainer">
+                    <div class="subCloseContainer">
+                        <img onclick="forgot()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                    </div>
+                    <div class="loginTextContainer">
+                        <p>Forgat Password</p>
+                    </div>
+                </div>
+    
+                <div class="inputContainer">
+                    <div class="subInputContainer" style="flex-direction: column;">
+                        <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter new password:</p>
+                        <input class="inputEmail" id="newPassword" type="password" required>
+                    </div>
+    
+                    <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                        <p style="width: 100%; justify-content: left; padding-left: 2rem;">Confirm your new password:</p>
+                        <input class="inputEmail" id="confirmPassword" type="password" required>
+                    </div>
+    
+                    <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                        <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your email to send OTP:</p>
+                        <input class="inputEmail" id="otpEmail" type="email" required>
+                    </div>
+    
+                    <div class="subInputContainer">
+                        <button class="loginButton1" onclick="sendOtp(), otp()">Send OTP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <div class="loginFormContainer OtpContainer" style="display: none;">
+        <div class="loginFormContainer" style="background-color: transparent;">
+            <div class="subLoginFormContainer">
+                <div class="closeContainer">
+                    <div class="subCloseContainer">
+                        <img onclick="otp()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                    </div>
+                    <div class="loginTextContainer">
+                        <p>Enter the OTP NO.</p>
+                    </div>
+                </div>
+        
+                <div class="inputContainer">
+                    <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                        <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your OTP code:</p>
+                        <input class="inputEmail" id="otpCode" type="text" required>
+                    </div>
+        
+                    <div class="subInputContainer">
+                        <button class="loginButton1" onclick="verifyOtp()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    
+    <div class="popUpMessageContainer1" id="successPopup1">
+        <div class="subPopUpMessageContainer">
+            <div class="imageContainer88">
+                <img class="image88" src="{% static 'img/rb_3505.png' %}" alt="">
+            </div>
+    
+            <div class="textContainer88" style="margin-bottom: 1rem;">
+                <p>Please fill in all fields.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="popUpMessageContainer1" id="successPopup2">
+        <div class="subPopUpMessageContainer">
+            <div class="imageContainer88">
+                <img class="image88" src="{% static 'img/rb_83749.png' %}" alt="">
+            </div>
+    
+            <div class="textContainer88" style="margin-bottom: 1rem;">
+                <p>Passwords do not match.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="popUpMessageContainer1" id="successPopup3">
+        <div class="subPopUpMessageContainer">
+            <div class="imageContainer88">
+                <img class="image88" src="{% static 'img/rb_3505.png' %}" alt="">
+            </div>
+    
+            <div class="textContainer88" style="margin-bottom: 1rem;">
+                <p>Invalid email or password.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="popUpMessageContainer1" id="successPopup4">
+        <div class="subPopUpMessageContainer">
+            <div class="imageContainer88">
+                <img class="image88" src="{% static 'img/rb_3505.png' %}" alt="">
+            </div>
+    
+            <div class="textContainer88" style="margin-bottom: 1rem;">
+                <p>Invalid email or password.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="popUpMessageContainer1" id="successPopup5">
+        <div class="subPopUpMessageContainer">
+            <div class="imageContainer88">
+                <img class="image88" src="{% static 'img/rb_1749.png' %}" alt="">
+            </div>
+    
+            <div class="textContainer88" style="margin-bottom: 1rem;">
+                <p>Password has been updated.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="popUpMessageContainer1" id="successPopup6">
+        <div class="subPopUpMessageContainer">
+            <div class="imageContainer88">
+                <img class="image88" src="{% static 'img/rb_6844.png' %}" alt="">
+            </div>
+    
+            <div class="textContainer88" style="margin-bottom: 1rem;">
+                <p>Password has been updated.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/loginForm.js' %}"></script>
+    <script>
+        function showPopup(popupId, message = null) {
+            const popup = document.getElementById(popupId);
+    
+            // Update the message text if provided
+            if (message) {
+                const textContainer = popup.querySelector('.textContainer88 p');
+                if (textContainer) {
+                    textContainer.textContent = message;
+                }
+            }
+    
+            popup.style.display = 'flex'; 
+    
+            // Hide after 3 seconds
+            setTimeout(() => {
+                popup.style.display = 'none'; 
+            }, 3000);
+        }
+    </script>
+    
+    <script>
+        function generateStudentID() {
+            fetch("{% url 'generate_student_id' %}", {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = "{% url 'dashboard' %}";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showPopup('successPopup4', 'An error occurred while generating the student ID.');
+            });
+        }
+    </script>
+    
+    <script>
+        function sendOtp() {
+            const newPassword = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const email = document.getElementById("otpEmail").value;
+    
+            if (!newPassword || !confirmPassword || !email) {
+                showPopup('successPopup1', 'Please fill in all fields.');
+                return;
+            }
+    
+            if (newPassword !== confirmPassword) {
+                showPopup('successPopup2', 'Passwords do not match.');
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+                return;
+            }
+    
+            fetch("{% url 'send_otp' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify({ email: email, password: newPassword }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showPopup('successPopup6', 'OTP has been sent successfully!');
+                } else {
+                    showPopup('successPopup4', data.message || 'Failed to send OTP.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showPopup('successPopup4', 'An error occurred while sending the OTP.');
+            });
+        }
+    
+        function verifyOtp() {
+            const otpCode = document.getElementById("otpCode").value;
+            const email = document.getElementById("otpEmail").value;
+            const newPassword = document.getElementById("newPassword").value; 
+    
+            if (!otpCode || !email || !newPassword) {
+                showPopup('successPopup1', 'Please fill in all fields.');
+                return;
+            }
+    
+            fetch("{% url 'reset_password' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify({ email: email, otp: otpCode, new_password: newPassword }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showPopup('successPopup5', 'Password has been updated successfully.');
+                    setTimeout(() => {
+                        window.location.href = "{% url 'loginForm' %}"; 
+                    }, 3000); // Redirect after showing popup
+                } else {
+                    showPopup('successPopup4', data.message || 'Invalid OTP or email.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showPopup('successPopup4', 'An error occurred while verifying the OTP.');
+            });
+        }
+    </script>
+    
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                showPopup('successPopup4', "{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+    
+</body>
+</html>
