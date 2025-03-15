@@ -49,6 +49,34 @@
                 width: 24rem;
             }
         }
+
+.viewButton{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.viewButton:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207); 
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+.closeButton9{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.closeButton9:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body style="background-color: rgb(240,240,240);">
@@ -59,6 +87,10 @@
                     <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
                     <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
                     <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+                </div>
+
+                <div>
+                    <p style="font-weight: bold; font-size: 0.9rem; color: rgb(72,72,72); margin: 0 0.2rem;">WMSU Course Recommendation System</p>
                 </div>
             </div>
 
@@ -133,7 +165,7 @@
                         </div>
 
                         <div class="viewContainer5">
-                            <button style="margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;" onclick="viewCourse({{ course.id }})" class="viewButton">View<img style="height: 1.2rem;" src="{% static 'img/eye.svg' %}" alt=""></button>
+                            <button style="width: 8rem; height: 2rem; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;" onclick="viewCourse({{ course.id }})" class="viewButton">View more<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button>
                         </div>
                     </div>
                 </div>
@@ -143,7 +175,7 @@
         </div>
 
         {% if course and not editing %}
-        <div class="addListContainer" style="display: block; position: fixed;">
+        <div class="addListContainer" style="display: block; position: fixed; z-index: 1;">
             <div class="addListContainer">
                 <div class="subAddListContainer">
                     <div class="closeContainer" style="margin-bottom: 1rem;">
@@ -213,7 +245,7 @@
         {% endif %}
 
         {% if editing %}
-        <div class="addListContainer1" style="display: block; position: fixed;">
+        <div class="addListContainer1" style="display: block; position: fixed; z-index: 1;">
             <div class="addListContainer1">
                 <div class="subAddListContainer">
                     <div class="closeContainer" style="margin-bottom: 1rem;">

@@ -19,6 +19,32 @@
             font-family: "Roboto", sans-serif;
         }
 
+.closeButton9{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.closeButton9:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+.viewButton{
+    background-color: rgb(207,207,207); 
+}
+
+
+.viewButton:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
 /*Cellphone*/
 @media only screen and (max-width: 600px){
 .subAddListContainer{
@@ -54,43 +80,43 @@
                 </div>
 
                 <div>
-                    <p style="font-weight: bold; font-size: 1.1rem; color: rgb(72,72,72);">{{ teacher_course }}</p>
+                    <p style="font-weight: bold; font-size: 0.9rem; color: rgb(72,72,72); margin: 0 0.2rem;">WMSU Course Recommendation System / {{ teacher_course }}</p>
                 </div>
             </div>
     
             <div style="background-color: rgb(240,240,240); z-index: 1;" class="subMenubarContainer">
                 <a href="{% url 'dashboardTeacher' %}">
-                    <div class="barContainer">
+                    <div class="barContainer" style="font-size: 1rem;">
                         <p>Dashboard</p>
                     </div>
                 </a>
                 
                 <a href="{% url 'teacherPanel' %}">
-                    <div class="barContainer">
+                    <div class="barContainer" style="font-size: 1rem;">
                         <p>List of students</p>
                     </div>
                 </a>
     
                 <a href="{% url 'approved_students' %}">
-                    <div class="barContainer">
-                        <p>Approve</p>
+                    <div class="barContainer" style="font-size: 1rem;">
+                        <p>Approved / Declined</p>
                     </div>
                 </a>
     
                 <a href="{% url 'teacherCourses' %}">
-                    <div class="barContainer">
+                    <div class="barContainer" style="font-size: 1rem;">
                         <p>Courses</p>
                     </div>
                 </a>
     
                 <a href="{% url 'setting' %}">
-                    <div class="barContainer">
-                        <p>Setting</p>
+                    <div class="barContainer" style="font-size: 1rem;">
+                        <p>Settings</p>
                     </div>
                 </a>
 
                 <a href="{% url 'logout' %}">
-                    <div class="barContainer1">
+                    <div class="barContainer1" style="font-size: 1rem;">
                         <p>Logout</p>
                     </div>
                 </a>
@@ -119,7 +145,7 @@
                         </div>
     
                         <div class="viewContainer5">
-                            <button style=" color: rgb(72,72,72); margin-left: 0.5rem;margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;" onclick="viewCourse({{ course.id }})" class="viewButton">View<img style="height: 1.2rem;" src="{% static 'img/eye.svg' %}" alt=""></button>
+                            <button style="width: 8rem; color: rgb(72,72,72); margin-left: 0.5rem;margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;" onclick="viewCourse({{ course.id }})" class="viewButton">View more<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button>
                         </div>
                     </div>
                 </div>
@@ -129,7 +155,7 @@
         </div>
 
         {% if course and not editing %}
-        <div class="addListContainer" style="display: block; height: 100vh;">
+        <div class="addListContainer" style="display: block; height: 100vh; z-index: 1;">
             <div class="addListContainer">
                 <div class="subAddListContainer">
                     <div class="closeContainer" style="margin-bottom: 1rem;">
@@ -199,7 +225,7 @@
         {% endif %}
 
         {% if editing %}
-        <div class="addListContainer1" style="display: block; height: 100vh;">
+        <div class="addListContainer1" style="display: block; height: 100vh; z-index: 1;">
             <div class="addListContainer1">
                 <div class="subAddListContainer">
                     <div class="closeContainer" style="margin-bottom: 1rem;">

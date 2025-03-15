@@ -25,6 +25,34 @@
     overflow: auto;
 }
 }
+
+.button1{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.button1:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207); 
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+.loginButton1{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.loginButton1:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207); 
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body style="background-color: rgb(240,240,240);">
@@ -34,6 +62,10 @@
                 <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
                 <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
                 <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+            </div>
+
+            <div>
+                <p style="font-weight: bold; font-size: 0.9rem; color: rgb(72,72,72); margin: 0 0.2rem;">WMSU Course Recommendation System</p>
             </div>
         </div>
 
@@ -96,7 +128,7 @@
         </div>
     </div>
 
-    <div class="loginFormContainer" style="display: none; position: fixed;">
+    <div class="loginFormContainer" style="display: none; position: fixed; z-index: 1;">
         <div class="loginFormContainer">
             <div class="subLoginFormContainer">
                 <div class="closeContainer">
@@ -127,7 +159,7 @@
         </div>
     </div>
 
-    <div class="addListContainer1" style="display: none;">
+    <div class="addListContainer1" style="display: none;z-index: 1;">
         <div class="addListContainer" style="background-color: none; position: fixed;">
             <div class="subAddListContainer">
                 <form method="POST" action="{% url 'adminSetting' %}">
@@ -203,7 +235,7 @@
     
     <!-- Message Popups -->
 {% for message in messages %}
-<div class="popUpMessageContainer1" style="display: flex;">
+<div class="popUpMessageContainer1" style="display: flex; z-index: 1;">
     <div class="subPopUpMessageContainer">
         <div class="imageContainer88">
             {% if message.tags == 'success' %}

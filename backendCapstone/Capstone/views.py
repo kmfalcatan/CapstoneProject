@@ -902,6 +902,22 @@ def approved_studentsDeclined(request):
         'teacher_course': teacher_course
     })
 
+# Add this function to handle the undo button click
+def undo_student(request, student_id):
+    if not request.session.get('teacher_id'):
+        return redirect('loginForm')
+
+    if not request.session.get('teacher_role') == 'Teacher':
+        return redirect('login')
+
+    try:
+        student = List.objects.get(id=student_id)
+        student.Status = 'Pending'  # Update status to 'Pending'
+        student.save()
+        return redirect('approved_studentsDeclined')  # Redirect back to the list of declined students
+    except List.DoesNotExist:
+        return render(request, 'loginForm.html', {'error': 'Student not found'})
+    
 def fetch_studentsDeclined(request):
     teacher_course = request.session.get('teacher_course', None)
 
