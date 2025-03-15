@@ -116,6 +116,76 @@
                 width: 90%;
             }
         }
+
+.filter{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.filter:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207); 
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+.viewButton{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.viewButton:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207); 
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+.button1{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.button1:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+input[type="text"]::placeholder {
+    color: rgb(72,72,72);
+}
+
+.button88{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+}
+
+.button89{
+    color: rgb(72,72,72);
+    border: solid rgb(207,207,207) 1px;
+}
+
+.button88:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+.button89:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
         </style>
 </head>
 <body style="background-color: rgb(240,240,240);">
@@ -125,6 +195,10 @@
                 <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
                 <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
                 <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
+            </div>
+
+            <div>
+                <p style="font-weight: bold; font-size: 0.9rem; color: rgb(72,72,72); margin: 0 0.2rem;">WMSU Course Recommendation System</p>
             </div>
         </div>
 
@@ -172,8 +246,8 @@
             </div>
 
             <div class="subFilterContainer">
-                <button onclick="addlist1()" class="filter" style="box-shadow: none; width: 10rem; display: flex; align-items: center; justify-content: center;">Add teacher <img style="height: 100%;" src="{% static 'img/plus.svg' %}" alt=""></button>
-                <input style="box-shadow: none;" class="searchBar" type="text" placeholder="Search..." id="searchBar" onkeyup="filterTeachers()">
+                <button onclick="addlist1()" class="filter" style="box-shadow: none; width: 10rem; display: flex; align-items: center; justify-content: center;">Add teacher <img style="height: 100%;" src="{% static 'img/plus (1).svg' %}" alt=""></button>
+                <input style="background-color: rgb(207,207,207); border: solid rgb(72,72,72) 1px; color: rgb(72,72,72); box-shadow: none;" class="searchBar" type="text" placeholder="Search..." id="searchBar" onkeyup="filterTeachers()">
             </div>
         </div>
 
@@ -201,10 +275,10 @@
                             data-address="{{ teacher.Address }}"
                             data-college="{{ teacher.College }}"
                             data-course="{{ teacher.Course }}"
-                            style="box-shadow: none; align-items: center; justify-content: center; display: flex;">View<img style="height: 1.2rem;" src="{% static 'img/eye.svg' %}" alt="">
+                            style="box-shadow: none; align-items: center; justify-content: center; display: flex;">View<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt="">
                     </button>
 
-                    <button style="box-shadow: none; align-items: center; justify-content: center; display: flex;" class="viewButton deleteButton" data-id="{{ teacher.id }}" onclick="deleteTeacher(this)" style=" display: flex; align-items: center; justify-content: center;">Delete <img style="height: 1.2rem;" src="{% static 'img/trash.svg' %}" alt=""></button>    
+                    <button style="box-shadow: none; align-items: center; justify-content: center; display: flex;" class="viewButton deleteButton" data-id="{{ teacher.id }}" onclick="deleteTeacher(this)" style=" display: flex; align-items: center; justify-content: center;">Delete <img style="height: 1.2rem;" src="{% static 'img/trash (1).svg' %}" alt=""></button>    
                 </div>
             </div>
             {% endfor %}

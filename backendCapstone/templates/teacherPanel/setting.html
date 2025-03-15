@@ -125,6 +125,32 @@
     overflow: auto;
 }
 }
+
+.loginButton1{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+}
+
+
+.loginButton1:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+.button1{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+}
+
+
+.button1:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
         </style>
 </head>
 <body>
@@ -137,40 +163,40 @@
             </div>
 
             <div>
-                <p style="font-weight: bold; font-size: 1.1rem; color: rgb(72,72,72);">{{ teacher_course }}</p>
+                <p style="font-weight: bold; font-size: 0.9rem; color: rgb(72,72,72); margin: 0 0.2rem;">WMSU Course Recommendation System / {{ teacher_course }}</p>
             </div>
         </div>
 
         <div style="background-color: rgb(240,240,240);" class="subMenubarContainer">
             <a href="{% url 'dashboardTeacher' %}">
-                <div class="barContainer">
+                <div class="barContainer" style="font-size: 1rem;">
                     <p>Dashboard</p>
                 </div>
             </a>
             
             <a href="{% url 'teacherPanel' %}">
-                <div class="barContainer">
+                <div class="barContainer" style="font-size: 1rem;">
                     <p>List of students</p>
                 </div>
             </a>
             <a href="{% url 'approved_students' %}">
-                <div class="barContainer">
-                    <p>Approve</p>
+                <div class="barContainer" style="font-size: 1rem;">
+                    <p>Approved / Declined</p>
                 </div>
             </a>
             <a href="{% url 'teacherCourses' %}">
-                <div class="barContainer">
+                <div class="barContainer" style="font-size: 1rem;">
                     <p>Courses</p>
                 </div>
             </a>
             <a href="{% url 'setting' %}">
-                <div class="barContainer">
+                <div class="barContainer" style="font-size: 1rem;">
                     <p>Settings</p>
                 </div>
             </a>
 
             <a href="{% url 'logout' %}">
-                <div class="barContainer1">
+                <div class="barContainer1" style="font-size: 1rem;">
                     <p>Logout</p>
                 </div>
             </a>

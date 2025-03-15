@@ -7,6 +7,7 @@ from Capstone import views
 urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('admin/', admin.site.urls),
+    path('undo_student/<int:student_id>/', views.undo_student, name='undo_student'),
     path('adminPanel/', views.adminPanel, name='adminPanel'),
     path('teacherPanel/', views.teacherPanel, name='teacherPanel'),
     path('course/', views.course, name='course'),

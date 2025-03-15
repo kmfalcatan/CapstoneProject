@@ -16,6 +16,10 @@
             margin: 0;
             font-family: "Roboto", sans-serif;
         }
+
+input[type="text"]::placeholder {
+    color: rgb(72,72,72);
+}
     </style>
     <style>
         .subAddListContainer{
@@ -172,6 +176,19 @@
     overflow: auto;
 }
 }
+.viewButton{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.viewButton:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207); 
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
         </style>
 </head>
 <body style="background-color: rgb(240,240,240);">
@@ -185,43 +202,43 @@
                 </div>
 
                 <div>
-                    <p style="font-weight: bold; font-size: 1.1rem; color: rgb(72,72,72);">{{ teacher_course }}</p>
+                    <p style="font-weight: bold; font-size: 0.9rem; color: rgb(72,72,72); margin: 0 0.2rem;">WMSU Course Recommendation System / {{ teacher_course }}</p>
                 </div>
             </div>
     
             <div style="background-color: rgb(240,240,240);" class="subMenubarContainer">
                 <a href="{% url 'dashboardTeacher' %}">
-                    <div class="barContainer">
+                    <div class="barContainer" style="font-size: 1rem;">
                         <p>Dashboard</p>
                     </div>
                 </a>
                 
                 <a href="{% url 'teacherPanel' %}">
-                    <div class="barContainer">
+                    <div class="barContainer" style="font-size: 1rem;">
                         <p>List of students</p>
                     </div>
                 </a>
     
                 <a href="{% url 'approved_students' %}">
-                    <div class="barContainer">
-                        <p>Approved</p>
+                    <div class="barContainer" style="font-size: 1rem;">
+                        <p>Approved / Declined</p>
                     </div>
                 </a>
     
                 <a href="{% url 'teacherCourses' %}">
-                    <div class="barContainer">
+                    <div class="barContainer" style="font-size: 1rem;">
                         <p>Courses</p>
                     </div>
                 </a>
     
                 <a href="{% url 'setting' %}">
-                    <div class="barContainer">
-                        <p>Setting</p>
+                    <div class="barContainer" style="font-size: 1rem;">
+                        <p>Settings</p>
                     </div>
                 </a>
 
                 <a href="{% url 'logout' %}">
-                    <div class="barContainer1">
+                    <div class="barContainer1" style="font-size: 1rem;">
                         <p>Logout</p>
                     </div>
                 </a>
@@ -235,7 +252,7 @@
                 <div class="subFilterContainer">
                     <form class="subFilterContainer" id="filterForm" method="get" action="{% url 'teacherPanel' %}">
                         <select style="width: 19.5rem; display: none;" class="filter" name="course" id="courseFilter" onchange="filterByCourse()">
-                        <input class="searchBar" type="text" name="search" id="searchBar" placeholder="Search..." value="{{ search_query }}">
+                        <input style="box-shadow: none; color: rgb(72, 72, 72); background-color: rgb(207, 207, 207); border: solid rgb(72,72,72) 1px;" class="searchBar" type="text" name="search" id="searchBar" placeholder="Search..." value="{{ search_query }}">
                         <button type="submit" style="display: none;"></button>
                     </form>
                 </div>
@@ -244,7 +261,7 @@
 
         <div class="listContainer">
             {% for student in students %}
-            <div class="subListContainer">
+            <div class="subListContainer" style="box-shadow: none;">
                 <div class="nameContainer">
                     <div class="subNameContainer">
                         <p>{{ student.Name }}</p>
@@ -262,7 +279,7 @@
                 </div>
 
                 <div class="viewButtonContainer">
-                    <button class="viewButton" id="student-{{ student.id }}" onclick="showStudent(
+                    <button style="box-shadow: none;" class="viewButton" id="student-{{ student.id }}" onclick="showStudent(
                         '{{ student.id }}', 
                         '{{ student.Name }}', 
                         '{{ student.Email }}', 
@@ -536,8 +553,8 @@
     // Fill the student details
     document.getElementById('studentName').innerText = name || 'N/A';
     document.getElementById('studentEmail').innerText = email || 'N/A';
-    document.getElementById('studentAvgGrade').innerText = 'Grade avg: ' + (avgGrade || 'N/A');
-    document.getElementById('studentAvgCet').innerText = 'CET avg: ' + (avgCet || 'N/A');
+    document.getElementById('studentAvgGrade').innerText = avgGrade || 'N/A';
+    document.getElementById('studentAvgCet').innerText = avgCet || 'N/A';
     document.getElementById('studentNumber').innerText = number || 'N/A';
     document.getElementById('ApplicationNo').innerText = ApplicationNo || 'N/A';
     document.getElementById('studentAddress').innerText = address || 'N/A';
