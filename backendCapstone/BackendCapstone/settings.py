@@ -168,4 +168,4 @@ MEDIA_URL = '/media/'  # URL to access media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store uploaded media files
 
 # ✅ Ensure DEBUG is True in development
-DEBUG = False  # Change to False in production
+DEBUG = True # Change to False in production
