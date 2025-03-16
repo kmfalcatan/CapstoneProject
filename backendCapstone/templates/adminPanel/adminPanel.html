@@ -7,7 +7,9 @@
     <title>Admin Panel</title>
     <link rel="stylesheet" href="{% static 'css/adminPanel.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <style>
@@ -240,48 +242,134 @@ input[type="text"]::placeholder {
             </a>
         </div>
 
-        <div class="filterContainer">
-            <div class="textContainer">
-                <p style="color: rgb(72,72,72);">List of teachers</p>
+        <div class="sideBarContainer">
+            <div class="upContainer">
+                <div class="titleContainer890">
+                    <p>WMSU Course Recommendation System</p>
+                </div>
+
+                <div class="ButtonContainer890">
+                    <a href="{% url 'dashboardAdmin' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/dashboard.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Dashboard</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'adminPanel' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of teachers</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'course' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of courses</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'feedback' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of feedbacks</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'adminSetting' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/settings.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
 
-            <div class="subFilterContainer">
-                <button onclick="addlist1()" class="filter" style="box-shadow: none; width: 10rem; display: flex; align-items: center; justify-content: center;">Add teacher <img style="height: 100%;" src="{% static 'img/plus (1).svg' %}" alt=""></button>
-                <input style="background-color: rgb(207,207,207); border: solid rgb(72,72,72) 1px; color: rgb(72,72,72); box-shadow: none;" class="searchBar" type="text" placeholder="Search..." id="searchBar" onkeyup="filterTeachers()">
+            <div class="upContainer">
+                <a href="{% url 'logout' %}">
+                    <div class="subButtonContainer890">
+                        <div class="iconContainer890">
+                            <img class="icon890" src="{% static 'img/logout.svg' %}" alt="">
+                        </div>
+
+                        <div class="textContainer890">
+                            <p>Logout</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
 
-        <div class="listContainer">
-            {% for teacher in teachers %}
-            <div class="subListContainer" style="box-shadow: none;">
-                <div class="nameContainer">
-                    <div class="subNameContainer">
-                        <p>{{ teacher.Name }}</p>
-                    </div>
-                    <div class="averageContainer">
-                        <div class="grades">
-                            <p style='text-align: center'>{{ teacher.Course }}</p>
-                        </div>
-                    </div>
+        <div class="subContainer1000">
+            <div class="filterContainer">
+                <div class="textContainer">
+                    <p style="color: rgb(72,72,72);">List of teachers</p>
                 </div>
-                <div class="viewButtonContainer" style="gap: 0.5rem;">
-                    <button onclick="showTeacherDetails(this)" 
-                            class="viewButton" 
-                            data-name="{{ teacher.Name }}"
-                            data-email="{{ teacher.Email }}"
-                            data-rank="{{ teacher.Rank }}"
-                            data-designation="{{ teacher.Designation }}"
-                            data-contactNo="{{ teacher.Number }}"
-                            data-address="{{ teacher.Address }}"
-                            data-college="{{ teacher.College }}"
-                            data-course="{{ teacher.Course }}"
-                            style="box-shadow: none; align-items: center; justify-content: center; display: flex;">View<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt="">
-                    </button>
-
-                    <button style="box-shadow: none; align-items: center; justify-content: center; display: flex;" class="viewButton deleteButton" data-id="{{ teacher.id }}" onclick="deleteTeacher(this)" style=" display: flex; align-items: center; justify-content: center;">Delete <img style="height: 1.2rem;" src="{% static 'img/trash (1).svg' %}" alt=""></button>    
+    
+                <div class="subFilterContainer">
+                    <button onclick="addlist1()" class="filter" style="box-shadow: none; width: 10rem; display: flex; align-items: center; justify-content: center;">Add teacher <img style="height: 100%;" src="{% static 'img/plus (1).svg' %}" alt=""></button>
+                    <input style="background-color: rgb(207,207,207); border: solid rgb(72,72,72) 1px; color: rgb(72,72,72); box-shadow: none;" class="searchBar" type="text" placeholder="Search..." id="searchBar" onkeyup="filterTeachers()">
                 </div>
             </div>
-            {% endfor %}
+    
+            <div class="listContainer">
+                {% for teacher in teachers %}
+                <div class="subListContainer" style="box-shadow: none;">
+                    <div class="nameContainer">
+                        <div class="subNameContainer">
+                            <p>{{ teacher.Name }}</p>
+                        </div>
+                        <div class="averageContainer">
+                            <div class="grades">
+                                <p style='text-align: center'>{{ teacher.Course }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viewButtonContainer" style="gap: 0.5rem;">
+                        <button onclick="showTeacherDetails(this)" 
+                                class="viewButton" 
+                                data-name="{{ teacher.Name }}"
+                                data-email="{{ teacher.Email }}"
+                                data-rank="{{ teacher.Rank }}"
+                                data-designation="{{ teacher.Designation }}"
+                                data-contactNo="{{ teacher.Number }}"
+                                data-address="{{ teacher.Address }}"
+                                data-college="{{ teacher.College }}"
+                                data-course="{{ teacher.Course }}"
+                                style="box-shadow: none; align-items: center; justify-content: center; display: flex;">View<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt="">
+                        </button>
+    
+                        <button style="box-shadow: none; align-items: center; justify-content: center; display: flex;" class="viewButton deleteButton" data-id="{{ teacher.id }}" onclick="deleteTeacher(this)" style=" display: flex; align-items: center; justify-content: center;">Delete <img style="height: 1.2rem;" src="{% static 'img/trash (1).svg' %}" alt=""></button>    
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

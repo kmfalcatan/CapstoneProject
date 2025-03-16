@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('admin/', admin.site.urls),
     path('undo_student/<int:student_id>/', views.undo_student, name='undo_student'),
+    path('undo_studentDecline/<int:student_id>/', views.undo_studentDecline, name='undo_studentDecline'),
     path('adminPanel/', views.adminPanel, name='adminPanel'),
     path('teacherPanel/', views.teacherPanel, name='teacherPanel'),
     path('course/', views.course, name='course'),

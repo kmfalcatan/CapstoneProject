@@ -1,4 +1,4 @@
-{% load static %}
+<!-- {% load static %} -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
 
-    <link rel="stylesheet" href="/Capstone/static/css/dashboardAdmin.css">
+    <link rel="stylesheet" href="/backendCapstone/Capstone/static/css/dashboardAdmin.css">
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="stylesheet" href="{% static 'css/dashboardAdmin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
+    <link rel="stylesheet" href="/backendCapstone/Capstone/static/css/sideBar.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
@@ -109,90 +112,176 @@
             </a>
         </div>
 
-        <div class="filterContainer">
-            <div class="textContainer">
-                <p style="color: rgb(72,72,72);">Dashboard</p>
+        <div class="sideBarContainer">
+            <div class="upContainer">
+                <div class="titleContainer890">
+                    <p>WMSU Course Recommendation System</p>
+                </div>
+
+                <div class="ButtonContainer890">
+                    <a href="{% url 'dashboardAdmin' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/dashboard.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Dashboard</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'adminPanel' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of teachers</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'course' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of courses</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'feedback' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of feedbacks</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'adminSetting' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/settings.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="upContainer">
+                <a href="{% url 'logout' %}">
+                    <div class="subButtonContainer890">
+                        <div class="iconContainer890">
+                            <img class="icon890" src="{% static 'img/logout.svg' %}" alt="">
+                        </div>
+
+                        <div class="textContainer890">
+                            <p>Logout</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
 
-        <div class="dashboardContainer">
-            <div class="subContainer5">
-                <div class="subDashboardContainer">
-                    <div class="numberContainer">
-                        <div class="nameContainer">
-                            <p>Teachers</p>
-                        </div>
-                        <div class="subNumberContainer">
-                            <p>{{ teacher_count }}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="numberContainer">
-                        <div class="nameContainer">
-                            <p>Students</p>
-                        </div>
-                        <div class="subNumberContainer">
-                            <p>{{ student_count }}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="numberContainer">
-                        <div class="nameContainer">
-                            <p>Course</p>
-                        </div>
-                        <div class="subNumberContainer">
-                            <p>{{ course_count }}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="numberContainer">
-                        <div class="nameContainer">
-                            <p>Feedback</p>
-                        </div>
-                        <div class="subNumberContainer">
-                            <p>{{ feedback_count }}</p>
-                        </div>
-                    </div>                    
-                </div>
-    
-                <div class="graphContainer">
-                    <div class="subGraphContainer">
-                        <div class="nameContainer">
-                            <p>Students who use the system</p>
-                        </div>
-
-                        <div class="graph" style="height: 18rem; width: 100%; align-items: center;">
-                            <canvas id="studentUsageGraph" style="width: 100%;"></canvas>
-                        </div>
-                    </div>
+        <div class="subContainer1000">
+            <div class="filterContainer">
+                <div class="textContainer">
+                    <p style="color: rgb(72,72,72);">Dashboard</p>
                 </div>
             </div>
-
-            <div class="tableContainer">
-                <div class="subTableContainer">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Course logo</th>
-                                <th>Course</th>
-                                <th>Approved Students</th>
-                                <th>Declined Students</th>
-                            </tr>
-                        </thead>
     
-                        <tbody>
-                            {% for course, data in table_data.items %}
-                            <tr>
-                                <td>
-                                    <img src="{% static 'img/' %}{{ data.Logo }}" alt="{{ course }} Logo" style="width: 50px; height: auto;">
-                                </td>
-                                <td>{{ course }}</td>
-                                <td>{{ data.Approved }}</td>
-                                <td>{{ data.Declined }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>                                         
-                    </table>
+            <div class="dashboardContainer">
+                <div class="subContainer5">
+                    <div class="subDashboardContainer">
+                        <div class="numberContainer">
+                            <div class="nameContainer">
+                                <p>Teachers</p>
+                            </div>
+                            <div class="subNumberContainer">
+                                <p>{{ teacher_count }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="numberContainer">
+                            <div class="nameContainer">
+                                <p>Students</p>
+                            </div>
+                            <div class="subNumberContainer">
+                                <p>{{ student_count }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="numberContainer">
+                            <div class="nameContainer">
+                                <p>Course</p>
+                            </div>
+                            <div class="subNumberContainer">
+                                <p>{{ course_count }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="numberContainer">
+                            <div class="nameContainer">
+                                <p>Feedback</p>
+                            </div>
+                            <div class="subNumberContainer">
+                                <p>{{ feedback_count }}</p>
+                            </div>
+                        </div>                    
+                    </div>
+        
+                    <div class="graphContainer">
+                        <div class="subGraphContainer">
+                            <div class="nameContainer">
+                                <p>Students who use the system</p>
+                            </div>
+    
+                            <div class="graph" style="height: 18rem; width: 100%; align-items: center;">
+                                <canvas id="studentUsageGraph" style="width: 100%;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="tableContainer">
+                    <div class="subTableContainer">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Course logo</th>
+                                    <th>Course</th>
+                                    <th>Approved Students</th>
+                                    <th>Declined Students</th>
+                                </tr>
+                            </thead>
+        
+                            <tbody>
+                                {% for course, data in table_data.items %}
+                                <tr>
+                                    <td>
+                                        <img src="{% static 'img/' %}{{ data.Logo }}" alt="{{ course }} Logo" style="width: 50px; height: auto;">
+                                    </td>
+                                    <td>{{ course }}</td>
+                                    <td>{{ data.Approved }}</td>
+                                    <td>{{ data.Declined }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>                                         
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

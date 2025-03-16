@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="{% static 'css/exploreCourses.css' %}">
     <link rel="stylesheet" href="/Capstone/static/css/exploreCourses.css">
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
@@ -24,6 +25,20 @@
 
 
 .viewButton5:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207);
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
+
+.closeButton5{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.closeButton5:hover{
     color: rgb(72,72,72);
     background-color: rgb(207,207,207);
     border: solid rgb(72,72,72) 1px;
@@ -236,7 +251,7 @@
             
                         <div class="descriptionContainer5">
                             <div class="labelContainer">
-                                <p>Description:</p>
+                                <p>Additional notes:</p>
                             </div>
                             <div class="description5" style="height: 8rem; overflow: auto;">
                                 <p id="courseDescription"></p>

@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <link rel="stylesheet" href="{% static 'css/setting.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="stylesheet" href="/Capstone/static/css/setting.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <style>
@@ -107,54 +109,140 @@
             </a>
         </div>
 
-        <div style="outline: none;" class="subContainer">
-            <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="addlist1()">
-                <div style="outline: none;" class="subSettingContainer">
-                    <img class="person" src="{% static 'img/percentage.svg' %}" alt="">
+        <div class="sideBarContainer">
+            <div class="upContainer">
+                <div class="titleContainer890">
+                    <p>WMSU Course Recommendation System</p>
                 </div>
-                <div style="outline: none;" class="textContainer4">
-                    <p>Edit Percentage</p>
+
+                <div class="ButtonContainer890">
+                    <a href="{% url 'dashboardAdmin' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/dashboard.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Dashboard</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'adminPanel' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of teachers</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'course' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of courses</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'feedback' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of feedbacks</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'adminSetting' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/settings.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="login()">
-                <div style="outline: none;" class="subSettingContainer">
-                    <img class="person" src="{% static 'img/image-removebg-preview (2).png' %}" alt="">
-                </div>
-                <div style="outline: none;" class="textContainer4">
-                    <p>Change password</p>
-                </div>
+            <div class="upContainer">
+                <a href="{% url 'logout' %}">
+                    <div class="subButtonContainer890">
+                        <div class="iconContainer890">
+                            <img class="icon890" src="{% static 'img/logout.svg' %}" alt="">
+                        </div>
+
+                        <div class="textContainer890">
+                            <p>Logout</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
 
-    <div class="loginFormContainer" style="display: none; position: fixed; z-index: 1;">
-        <div class="loginFormContainer">
-            <div class="subLoginFormContainer">
-                <div class="closeContainer">
-                    <div class="subCloseContainer">
-                        <img onclick="login()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+        <div class="subContainer1000">
+            <div style="outline: none;" class="subContainer">
+                <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="addlist1()">
+                    <div style="outline: none;" class="subSettingContainer">
+                        <img class="person" src="{% static 'img/percentage.svg' %}" alt="">
                     </div>
-                    <div class="loginTextContainer">
+                    <div style="outline: none;" class="textContainer4">
+                        <p>Edit Percentage</p>
+                    </div>
+                </div>
+    
+                <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="login()">
+                    <div style="outline: none;" class="subSettingContainer">
+                        <img class="person" src="{% static 'img/image-removebg-preview (2).png' %}" alt="">
+                    </div>
+                    <div style="outline: none;" class="textContainer4">
                         <p>Change password</p>
                     </div>
                 </div>
-                <form method="POST" action="{% url 'adminSetting' %}">
-                    {% csrf_token %}
-                    <div class="inputContainer">
-                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
-                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your old password:</p>
-                            <input class="inputEmail" type="password" name="old_password" required>
+            </div>
+        </div>
+    
+        <div class="loginFormContainer" style="display: none; position: fixed; z-index: 1;">
+            <div class="loginFormContainer">
+                <div class="subLoginFormContainer">
+                    <div class="closeContainer">
+                        <div class="subCloseContainer">
+                            <img onclick="login()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
                         </div>
-                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
-                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your new password:</p>
-                            <input class="inputEmail" type="password" name="new_password" required>
+                        <div class="loginTextContainer">
+                            <p>Change password</p>
                         </div>
-                        <div class="subInputContainer">
-                            <button type="submit" name="change_password" class="loginButton1">Save</button>
-                        </div>
-                    </div>                    
-                </form>
+                    </div>
+                    <form method="POST" action="{% url 'adminSetting' %}">
+                        {% csrf_token %}
+                        <div class="inputContainer">
+                            <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your old password:</p>
+                                <input class="inputEmail" type="password" name="old_password" required>
+                            </div>
+                            <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your new password:</p>
+                                <input class="inputEmail" type="password" name="new_password" required>
+                            </div>
+                            <div class="subInputContainer">
+                                <button type="submit" name="change_password" class="loginButton1">Save</button>
+                            </div>
+                        </div>                    
+                    </form>
+                </div>
             </div>
         </div>
     </div>

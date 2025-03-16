@@ -811,6 +811,8 @@ def update_student_status(request):
     return JsonResponse({'message': 'Invalid request.'}, status=400)
 
 from datetime import datetime
+from django.db.models import Max
+from datetime import datetime
 
 def approved_students(request):
     if not request.session.get('teacher_id'):
@@ -818,8 +820,6 @@ def approved_students(request):
 
     if not request.session.get('teacher_role') == 'Teacher':
         return redirect('login')
-
-    teacher_course = request.session.get('teacher_course')
 
     teacher_email = request.session.get('teacher_email', None)
 
@@ -839,7 +839,15 @@ def approved_students(request):
     search_query = request.GET.get('search', '').strip()
     current_year = datetime.now().year
 
-    students_query = List.objects.filter(Course=teacher_course, Status='Approved', Year=current_year)
+    # Step 1: Get the latest entry for each student based on their Name
+    latest_students = (
+        List.objects.filter(Course=teacher_course, Status='Approved', Year=current_year)
+        .values('Name')  # Group by Name
+        .annotate(latest_id=Max('id'))  # Get the latest entry for each student
+    )
+
+    # Step 2: Fetch only the latest entries (removes duplicates)
+    students_query = List.objects.filter(id__in=[entry['latest_id'] for entry in latest_students])
 
     if search_query:
         students_query = students_query.filter(Name__icontains=search_query)
@@ -914,10 +922,26 @@ def undo_student(request, student_id):
         student = List.objects.get(id=student_id)
         student.Status = 'Pending'  # Update status to 'Pending'
         student.save()
-        return redirect('approved_studentsDeclined')  # Redirect back to the list of declined students
+        return redirect('approved_students')  # Redirect back to the list of declined students
     except List.DoesNotExist:
         return render(request, 'loginForm.html', {'error': 'Student not found'})
     
+def undo_studentDecline(request, student_id):
+    if not request.session.get('teacher_id'):
+        return redirect('loginForm')
+
+    if not request.session.get('teacher_role') == 'Teacher':
+        return redirect('login')
+
+    try:
+        student = List.objects.get(id=student_id)
+        student.Status = 'Pending'  # Update status to 'Pending'
+        student.save()
+        return redirect('approved_studentsDeclined')  # Redirect back to the list of declined students
+    except List.DoesNotExist:
+        return render(request, 'loginForm.html', {'error': 'Student not found'})
+   
+   
 def fetch_studentsDeclined(request):
     teacher_course = request.session.get('teacher_course', None)
 
