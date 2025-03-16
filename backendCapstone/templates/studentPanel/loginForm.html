@@ -77,7 +77,7 @@
 <body>
     <div class="landingContainer">
         <div class="subLandingContainer">
-            <div class="headerContainer77">
+            <div class="headerContainer77" style="z-index: -100;">
                 <div class="subHeaderContainer77">
                     <img class="logo77" src="{% static 'img/wmsuLogo.png' %}" alt="">
                     <p class="logoName77">WMSU Course Recommendation System</p>
@@ -137,9 +137,9 @@
         </div>
     </div> -->
 
-    <div class="loginFormContainer" style="display: none; z-index: 1;">
-        <div class="loginFormContainer" style="background-color: transparent;">
-            <div class="subLoginFormContainer">
+    <div class="loginFormContainer" style="display: none; z-index: 100;">
+        <div class="loginFormContainer" style="background-color: transparent; z-index: 100;">
+            <div class="subLoginFormContainer" style="z-index: 1;">
                 <div class="closeContainer">
                     <div class="subCloseContainer">
                         <img onclick="login()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">

@@ -7,10 +7,22 @@
     <title>Department Head Panel</title>
     <link rel="stylesheet" href="{% static 'css/setting.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <style>
+
+        .barContainer:hover{
+          background-color: rgb(207,207,207); 
+          color: rgb(72,72,72);
+        }
+        
+        .barContainer1:hover{
+          background-color: rgb(207,207,207); 
+          color: rgb(72,72,72);
+        }
         *{
             padding: 0;
             margin: 0;
@@ -154,7 +166,7 @@
         </style>
 </head>
 <body>
-    <div class="container" style="background-color: rgb(240,240,240);">
+    <div class="container" style="background-color: rgb(240,240,240); height: 100vh;">
         <div class="headerContainer">
             <div class='menubarContainer' onclick='toggleMenu(this)'>
                 <div class='line' style="border: solid rgb(72,72,72) 2px;"></div>
@@ -186,7 +198,7 @@
             </a>
             <a href="{% url 'teacherCourses' %}">
                 <div class="barContainer" style="font-size: 1rem;">
-                    <p>Courses</p>
+                    <p>Course</p>
                 </div>
             </a>
             <a href="{% url 'setting' %}">
@@ -202,57 +214,144 @@
             </a>
         </div>
 
-        <div style="outline: none;" class="subContainer">
-            <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="addlist()">
-                <div style="outline: none;" class="subSettingContainer">
-                    <img class="person" src="{% static 'img/image-removebg-preview1.png' %}" alt="">
+        <div class="sideBarContainer">
+            <div class="upContainer">
+                <div class="titleContainer890" style="flex-direction: column; height: 6rem; justify-content: center;">
+                    <p style="border-bottom: solid rgb(72,72,72) 1px; width: 100%; text-align: center;">WCRS</p>
+                    <p style="font-weight: normal; margin-top: 0.2rem; text-align: center;">{{ teacher_course }}</p>
                 </div>
-                <div style="outline: none;" class="textContainer4">
-                    <p>Profile</p>
+
+                <div class="ButtonContainer890">
+                    <a href="{% url 'dashboardTeacher' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/dashboard.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Dashboard</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'teacherPanel' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of students</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'approved_students' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Approved / Declined</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'teacherCourses' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Course</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'setting' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/settings.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="login()">
-                <div style="outline: none;" class="subSettingContainer">
-                    <img class="person" src="{% static 'img/image-removebg-preview (2).png' %}" alt="">
-                </div>
-                <div style="outline: none; " class="textContainer4">
-                    <p>Change password</p>
-                </div>
+            <div class="upContainer">
+                <a href="{% url 'logout' %}">
+                    <div class="subButtonContainer890">
+                        <div class="iconContainer890">
+                            <img class="icon890" src="{% static 'img/logout.svg' %}" alt="">
+                        </div>
+
+                        <div class="textContainer890">
+                            <p>Logout</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
 
-    <div class="loginFormContainer" style="display: none;">
-        <div class="loginFormContainer">
-            <div class="subLoginFormContainer">
-                <div class="closeContainer">
-                    <div class="subCloseContainer">
-                        <img onclick="login()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+        <div class="subContainer1000">
+            <div style="outline: none;" class="subContainer">
+                <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="addlist()">
+                    <div style="outline: none;" class="subSettingContainer">
+                        <img class="person" src="{% static 'img/image-removebg-preview1.png' %}" alt="">
                     </div>
-                    <div class="loginTextContainer">
+                    <div style="outline: none;" class="textContainer4">
+                        <p>Profile</p>
+                    </div>
+                </div>
+    
+                <div style="outline: none; background-color: rgb(158, 21, 21);" class="settingContainer" onclick="login()">
+                    <div style="outline: none;" class="subSettingContainer">
+                        <img class="person" src="{% static 'img/image-removebg-preview (2).png' %}" alt="">
+                    </div>
+                    <div style="outline: none; " class="textContainer4">
                         <p>Change password</p>
                     </div>
                 </div>
-                <form method="POST" action="{% url 'setting' %}">
-                    {% csrf_token %}
-                    <div class="inputContainer">
-                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
-                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your old password:</p>
-                            <input class="inputEmail" type="password" name="old_password" placeholder="Enter your old password:" required>
-                        </div>
-                        <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
-                            <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your new password:</p>
-                            <input class="inputEmail" type="password" name="new_password" placeholder="Enter your new password:" required>
-                        </div>
-                        <div class="subInputContainer">
-                            <button type="submit" class="loginButton1">Save</button>
-                        </div>
-                    </div>                    
-                </form>
             </div>
         </div>
     </div>
+    
+        <div class="loginFormContainer" style="display: none;">
+            <div class="loginFormContainer">
+                <div class="subLoginFormContainer">
+                    <div class="closeContainer">
+                        <div class="subCloseContainer">
+                            <img onclick="login()" class="close" src="{% static 'img/Screenshot 2024-07-17 221356.png' %}" alt="">
+                        </div>
+                        <div class="loginTextContainer">
+                            <p>Change password</p>
+                        </div>
+                    </div>
+                    <form method="POST" action="{% url 'setting' %}">
+                        {% csrf_token %}
+                        <div class="inputContainer">
+                            <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your old password:</p>
+                                <input class="inputEmail" type="password" name="old_password" placeholder="Enter your old password:" required>
+                            </div>
+                            <div class="subInputContainer" style="flex-direction: column; margin-top: 0.5rem;">
+                                <p style="width: 100%; justify-content: left; padding-left: 2rem;">Enter your new password:</p>
+                                <input class="inputEmail" type="password" name="new_password" placeholder="Enter your new password:" required>
+                            </div>
+                            <div class="subInputContainer">
+                                <button type="submit" class="loginButton1">Save</button>
+                            </div>
+                        </div>                    
+                    </form>
+                </div>
+            </div>
+        </div>
 
     <div class="addListContainer" style="display: none;">
         <div class="addListContainer">

@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
     <link rel="stylesheet" href="{% static 'css/exploreCourses.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
     <link rel="stylesheet" href="/Capstone/static/css/feedback.css">
     <link rel="stylesheet" href="/Capstone/static/css/exploreCourses.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,34 +118,120 @@
             </a>
         </div>
 
-        <div class="filterContainer">
-            <div class="textContainer">
-                <p style="color: rgb(72,72,72);">List of Feedback</p>
+        <div class="sideBarContainer">
+            <div class="upContainer">
+                <div class="titleContainer890">
+                    <p>WMSU Course Recommendation System</p>
+                </div>
+
+                <div class="ButtonContainer890">
+                    <a href="{% url 'dashboardAdmin' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/dashboard.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Dashboard</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'adminPanel' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of teachers</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'course' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of courses</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'feedback' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of feedbacks</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'adminSetting' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/settings.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="upContainer">
+                <a href="{% url 'logout' %}">
+                    <div class="subButtonContainer890">
+                        <div class="iconContainer890">
+                            <img class="icon890" src="{% static 'img/logout.svg' %}" alt="">
+                        </div>
+
+                        <div class="textContainer890">
+                            <p>Logout</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
 
-        <div class="courseContainer5" style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 0;">
-            {% for feedback in feedbacks %}
-            <div class="subCourseContainer5 subCourse">
-                <div class="courseInfoContainer5">
-                    <div class="logoContainer5">
-                        <img 
-                            style="filter: invert(1);" 
-                            class="logo5" 
-                            src="{% static 'img/person (1).svg' %}" 
-                            alt="{{ course.Course|escape }}">
-                    </div>
-
-                    <div class="courseNameContainer5">
-                        <p class="courseName5" style="width: 100%;">{{ feedback.Name }}</p>
-                    </div>
-    
-                    <div class="viewContainer5">
-                        <button  style="width: 8rem; height: 2rem; box-shadow: none; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;" onclick="showFeedback('{{ feedback.Feedback }}')" class="viewButton">View more<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button>
-                    </div>
+        <div class="subContainer1000">
+            <div class="filterContainer">
+                <div class="textContainer">
+                    <p style="color: rgb(72,72,72);">List of Feedback</p>
                 </div>
             </div>
-            {% endfor %}
+    
+            <div class="courseContainer5" style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 0;">
+                {% for feedback in feedbacks %}
+                <div class="subCourseContainer5 subCourse">
+                    <div class="courseInfoContainer5">
+                        <div class="logoContainer5">
+                            <img 
+                                style="filter: invert(1);" 
+                                class="logo5" 
+                                src="{% static 'img/person (1).svg' %}" 
+                                alt="{{ course.Course|escape }}">
+                        </div>
+    
+                        <div class="courseNameContainer5">
+                            <p class="courseName5" style="width: 100%;">{{ feedback.Name }}</p>
+                        </div>
+        
+                        <div class="viewContainer5">
+                            <button  style="width: 8rem; height: 2rem; box-shadow: none; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;" onclick="showFeedback('{{ feedback.Feedback }}')" class="viewButton">View more<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

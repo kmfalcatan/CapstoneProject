@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="{% static 'css/adminPanel.css' %}">
     <link rel="stylesheet" href="{% static 'css/exploreCourses.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
     <link rel="stylesheet" href="/Capstone/static/css/adminPanel.css">
+    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <style>
@@ -363,26 +365,113 @@ input[type="text"]::placeholder {
             </a>
         </div>
 
-        <div class="filterContainer">
-            <div class="textContainer">
-                <p style="color: rgb(72,72,72);" id="pageTitle">Declined Student</p>
+        <div class="sideBarContainer">
+            <div class="upContainer">
+                <div class="titleContainer890" style="flex-direction: column; height: 6rem; justify-content: center;">
+                    <p style="border-bottom: solid rgb(72,72,72) 1px; width: 100%; text-align: center;">WCRS</p>
+                    <p style="font-weight: normal; margin-top: 0.2rem; text-align: center;">{{ teacher_course }}</p>
+                </div>
+
+                <div class="ButtonContainer890">
+                    <a href="{% url 'dashboardTeacher' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/dashboard.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Dashboard</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'teacherPanel' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of students</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'approved_students' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Approved / Declined</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'teacherCourses' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Courses</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'setting' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/settings.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
-        
-            <div class="subFilterContainer">
-                <button type="button" id="printButton" class="printButton filter" onclick="printStudentList()" style="background-color: rgb(207,207,207); color: rgb(72,72,72); box-shadow: none; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;padding: 0 0.5rem 0 0.5rem;">
-                    Print List<img style="height: 1.2rem;" src="{% static 'img/printer (1).svg' %}" alt="">
-                </button>
-                
-                <a href="{% url 'approved_students' %}"><button class="printButton filter" style="background-color: rgb(207,207,207); color: rgb(72,72,72); padding: 0 0.5rem 0 0.5rem; box-shadow: none; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;">See Declined Student<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button></a>
-                
-                <input style="box-shadow: none; color: rgb(72, 72, 72); background-color: rgb(207, 207, 207); border: solid rgb(72,72,72) 1px;" class="searchBar" type="text" name="search" id="searchBar" placeholder="Search..." value="{{ search_query }}">
-                <button type="submit" style="display: none;"></button>
+
+            <div class="upContainer">
+                <a href="{% url 'logout' %}">
+                    <div class="subButtonContainer890">
+                        <div class="iconContainer890">
+                            <img class="icon890" src="{% static 'img/logout.svg' %}" alt="">
+                        </div>
+
+                        <div class="textContainer890">
+                            <p>Logout</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
-        
 
-        <div id="studentListContainer" class="courseContainer5" style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 0;">
+        <div class="subContainer1000">
+            <div class="filterContainer" style="height: 3rem;">
+                <div class="textContainer">
+                    <p style="color: rgb(72,72,72);" id="pageTitle">Declined Student</p>
+                </div>
             
+                <div class="subFilterContainer">
+                    <button type="button" id="printButton" class="printButton filter" onclick="printStudentList()" style="background-color: rgb(207,207,207); color: rgb(72,72,72); box-shadow: none; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;padding: 0 0.5rem 0 0.5rem;">
+                        Print List<img style="height: 1.2rem;" src="{% static 'img/printer (1).svg' %}" alt="">
+                    </button>
+                    
+                    <a href="{% url 'approved_students' %}"><button class="printButton filter" style="background-color: rgb(207,207,207); color: rgb(72,72,72); padding: 0 0.5rem 0 0.5rem; box-shadow: none; margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;">See Approved Student<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button></a>
+                    
+                    <input style="box-shadow: none; color: rgb(72, 72, 72); background-color: rgb(207, 207, 207); border: solid rgb(72,72,72) 1px;" class="searchBar" type="text" name="search" id="searchBar" placeholder="Search..." value="{{ search_query }}">
+                    <button type="submit" style="display: none;"></button>
+                </div>
+            </div>
+            
+    
+            <div id="studentListContainer" class="courseContainer5" style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 0;">
+                
+            </div>
         </div>
     </div>
 
@@ -588,7 +677,7 @@ function updateStudentList(students) {
                     </div>
                     
                     <div class="viewButtonContainer" style="display: flex; gap: 0.5rem;">
-                        <button style='box-shadow: none; color: rgb(72,72,72); margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;' class="viewButton" onclick="showStudentDetails({{ student.id }})">View<img class="imgHover" style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button>
+                        <button style='box-shadow: none; color: rgb(72,72,72); margin-left: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem;' class="viewButton" onclick="showStudentDetails(${index})"">View<img class="imgHover" style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button>
 
                         <!-- Undo Button Form -->
                         <form action="{% url 'undo_student' student.id %}" method="post" style="display: inline;">
@@ -625,12 +714,14 @@ function showStudentDetails(index) {
                 <div class="upload" onclick="zoomImage('/media/${student.CetPicture}')">
                     <img class="picture4" id="cetImage" src="/media/${student.CetPicture}" alt="CET Image">
                 </div> 
+                <p>CET Overall Percentage</p>
             </div>
 
             <div class="subUploadContainer">
                 <div class="upload" onclick="zoomImage('/media/${student.GradePicture}')">
                     <img class="picture4" id="gradeImage" src="/media/${student.GradePicture}" alt="Grade Image">
                 </div>
+                <p>SHS Average Grade</p>
             </div>
         </div>  
 

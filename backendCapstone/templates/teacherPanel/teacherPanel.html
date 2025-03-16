@@ -6,11 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Department Head Panel</title>
     <link rel="stylesheet" href="{% static 'css/adminPanel.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <style>
+
+        .barContainer:hover{
+          background-color: rgb(207,207,207); 
+          color: rgb(72,72,72);
+        }
+        
+        .barContainer1:hover{
+          background-color: rgb(207,207,207); 
+          color: rgb(72,72,72);
+        }
         *{
             padding: 0;
             margin: 0;
@@ -189,6 +201,19 @@ input[type="text"]::placeholder {
     border: solid rgb(72,72,72) 1px;
     transform: scale(1.05);
 }
+.button1{
+    background-color: rgb(207,207,207); 
+    color: rgb(72,72,72);
+    box-shadow: none;
+}
+
+
+.button1:hover{
+    color: rgb(72,72,72);
+    background-color: rgb(207,207,207); 
+    border: solid rgb(72,72,72) 1px;
+    transform: scale(1.05);
+}
         </style>
 </head>
 <body style="background-color: rgb(240,240,240);">
@@ -227,7 +252,7 @@ input[type="text"]::placeholder {
     
                 <a href="{% url 'teacherCourses' %}">
                     <div class="barContainer" style="font-size: 1rem;">
-                        <p>Courses</p>
+                        <p>Course</p>
                     </div>
                 </a>
     
@@ -243,7 +268,94 @@ input[type="text"]::placeholder {
                     </div>
                 </a>
             </div>
+        </div>
 
+        <div class="sideBarContainer">
+            <div class="upContainer">
+                <div class="titleContainer890" style="flex-direction: column; height: 6rem; justify-content: center;">
+                    <p style="border-bottom: solid rgb(72,72,72) 1px; width: 100%; text-align: center;">WCRS</p>
+                    <p style="font-weight: normal; margin-top: 0.2rem; text-align: center;">{{ teacher_course }}</p>
+                </div>
+
+                <div class="ButtonContainer890">
+                    <a href="{% url 'dashboardTeacher' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/dashboard.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Dashboard</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'teacherPanel' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>List of students</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'approved_students' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Approved / Declined</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'teacherCourses' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/clipboard-list.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Course</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'setting' %}">
+                        <div class="subButtonContainer890">
+                            <div class="iconContainer890">
+                                <img class="icon890" src="{% static 'img/settings.svg' %}" alt="">
+                            </div>
+
+                            <div class="textContainer890">
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="upContainer">
+                <a href="{% url 'logout' %}">
+                    <div class="subButtonContainer890">
+                        <div class="iconContainer890">
+                            <img class="icon890" src="{% static 'img/logout.svg' %}" alt="">
+                        </div>
+
+                        <div class="textContainer890">
+                            <p>Logout</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="subContainer1000">
             <div class="filterContainer">
                 <div class="textContainer">
                     <p style="color: rgb(72,72,72);">List of students</p>
@@ -257,7 +369,6 @@ input[type="text"]::placeholder {
                     </form>
                 </div>
             </div>
-        </div>
 
         <div class="listContainer">
             {% for student in students %}
@@ -279,7 +390,7 @@ input[type="text"]::placeholder {
                 </div>
 
                 <div class="viewButtonContainer">
-                    <button style="box-shadow: none;" class="viewButton" id="student-{{ student.id }}" onclick="showStudent(
+                    <button style="box-shadow: none; display: flex; align-items: center; justify-content: center;" class="viewButton" id="student-{{ student.id }}" onclick="showStudent(
                         '{{ student.id }}', 
                         '{{ student.Name }}', 
                         '{{ student.Email }}', 
@@ -297,11 +408,12 @@ input[type="text"]::placeholder {
                         '{{ student.AbstractLogicThinkingSkills }}',
                         '{{ student.CetPicture }}',  
                         '{{ student.GradePicture }}' 
-                    )">View</button>
+                    )">View<img style="height: 1.2rem;" src="{% static 'img/eye (2).svg' %}" alt=""></button>
 
                 </div>
             </div>
             {% endfor %}
+        </div>
         </div>
     </div>
 
@@ -331,6 +443,7 @@ input[type="text"]::placeholder {
                         <div class="upload">
                             <img onclick="zoomCet(this)" id="cetImage" class="picture4" src="{{ student.CetPicture }}" alt="CET Image" />
                         </div>
+                        <p>CET Overall Percentage</p>
                     </div>
                 
                     <div class="subUploadContainer">
@@ -338,6 +451,7 @@ input[type="text"]::placeholder {
                         <div class="upload">
                             <img onclick="zoomGrade(this)" id="gradeImage" class="picture4" src="{{ student.GradePicture }}" alt="Grade Image" />
                         </div>
+                        <p>SHS Average Grade</p>
                     </div>
                 </div>
 
@@ -461,8 +575,8 @@ input[type="text"]::placeholder {
                         </div>
                             
                         <div class="buttonContainer2" style="height: 5rem;">
-                            <button class="button1" id="approveButton" onclick="updateStatus('Approved')">Approved</button>
-                            <button class="button1" id="declineButton" onclick="updateStatus('Declined')">Declined</button>
+                            <button class="button1" id="approveButton" onclick="updateStatus('Approved')">Approve</button>
+                            <button class="button1" id="declineButton" onclick="updateStatus('Declined')">Decline</button>
                         </div>
                     </div>
                 </div>
