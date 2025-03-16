@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Panel</title>
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{% static 'css/popUpMessage.css' %}">
@@ -22,7 +23,7 @@
     /*Cellphone*/
     @media only screen and (max-width: 600px){
         .subInstructionContainer{
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             padding: 0 0.5rem 0 0.5rem;
         }
 
@@ -97,7 +98,7 @@ input[type="text"]::placeholder {
 
             <div class="instructionContainer">
                 <div class="subInstructionContainer">
-                    <p>1.Strongly disagree | 2.Disagree | 3.Agree | 4.Strongly agree</p>
+                    <p style="height: 100%; width: 100%; display: flex; justify-content: center; align-items:  center;"><span style="width: 1.4rem; text-align: center; border-radius: 5rem; background-color: rgb(158, 21, 21); color: white; font-size: 1.2rem;">1</span>Strongly disagree <span  style="width: 1.4rem; text-align: center; border-radius: 5rem; background-color: rgb(158, 21, 21); color: white; font-size: 1.2rem;">2</span>Disagree <span  style="width: 1.4rem; text-align: center; border-radius: 5rem; background-color: rgb(158, 21, 21); color: white; font-size: 1.2rem;">3</span>Agree <span  style="width: 1.4rem; text-align: center; border-radius: 5rem; background-color: rgb(158, 21, 21); color: white; font-size: 1.2rem;">4</span>Strongly agree</p>
                 </div>
             </div>
 
@@ -191,7 +192,7 @@ input[type="text"]::placeholder {
         </div>
 
         <div class="textContainer88" style="margin-bottom: 1rem;">
-            <p>Results still processing...</p>
+            <p>Do not reload. Please note that reloading the page will lose all your progress.</p>
         </div>
     </div>
 </div>
@@ -246,15 +247,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const questionsPerPage = 5;
     const questionContainers = document.querySelectorAll(".subQuestionContainer");
     const totalPages = Math.ceil(questionContainers.length / questionsPerPage);
-    
+
     function showPage(page) {
         questionContainers.forEach((q, index) => {
             q.style.display = (index >= page * questionsPerPage && index < (page + 1) * questionsPerPage) ? "block" : "none";
         });
-        
+
         document.getElementById("prevButton").style.display = page === 0 ? "none" : "inline-block";
         document.getElementById("nextButton").style.display = page === totalPages - 1 ? "none" : "inline-block";
         document.getElementById("doneButton").style.display = page === totalPages - 1 ? "inline-block" : "none";
+
+        // Update the page counter text
+        document.getElementById("pageCounter").innerText = `Page ${page + 1} of ${totalPages}`;
+
         validateNextButton();
     }
 
@@ -269,7 +274,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const buttonContainer = document.createElement("div");
     buttonContainer.style.textAlign = "center";
     buttonContainer.style.marginTop = "1rem";
-    
+
+    // Page counter
+    const pageCounter = document.createElement("span");
+    pageCounter.id = "pageCounter";
+    pageCounter.style.display = "block";
+    pageCounter.style.marginBottom = "0.5rem";
+    pageCounter.style.fontWeight = "normal";
+
     const prevButton = document.createElement("button");
     prevButton.innerText = "Back";
     prevButton.id = "prevButton";
@@ -282,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
             showPage(currentPage);
         }
     });
-    
+
     const nextButton = document.createElement("button");
     nextButton.innerText = "Next";
     nextButton.id = "nextButton";
@@ -295,22 +307,24 @@ document.addEventListener("DOMContentLoaded", function () {
             showPage(currentPage);
         }
     });
-    
+
     const doneButton = document.createElement("button");
     doneButton.innerText = "Done";
     doneButton.id = "doneButton";
     doneButton.style.display = "none";
     doneButton.style.margin = "0.5rem";
     doneButton.className = "submitButton";
-    doneButton.setAttribute("onclick", "showPopup()")
-    
+    doneButton.setAttribute("onclick", "showPopup()");
+
+    buttonContainer.appendChild(pageCounter);
     buttonContainer.appendChild(prevButton);
     buttonContainer.appendChild(nextButton);
     buttonContainer.appendChild(doneButton);
     document.querySelector(".questionContainer").appendChild(buttonContainer);
-    
+
     showPage(currentPage);
 });
+
 </script>
 
     <script>

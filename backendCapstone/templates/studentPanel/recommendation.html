@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Panel</title>
 
+    <link rel="icon" type="image/png" href="{% static 'img/wmsuLogo.png' %}">
     <link rel="stylesheet" href="{% static 'css/exploreCourses.css' %}">
     <link rel="stylesheet" href="/Capstone/static/css/exploreCourses.css">
     <link rel="stylesheet" href="/Capstone/static/css/viewRecommendation.css">
@@ -396,7 +397,7 @@
 
                         <div class="descriptionContainer5">
                             <div class="labelContainer">
-                                <p>Description:</p>
+                                <p>Reason:</p>
                             </div>
                             <div class="description5">
                                 <p id="reason"></p>
@@ -467,7 +468,7 @@
 
                         <div class="descriptionContainer5">
                             <div class="labelContainer">
-                                <p>Description:</p>
+                                <p>Reason:</p>
                             </div>
                             <div class="description5">
                                 <p id="courseDescription1"></p>
@@ -658,7 +659,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
     const courses = document.querySelectorAll(".courseInfoContainer5");
-    const coursesPerPage = 4;
+    const coursesPerPage = 6;
     let currentPage = 0;
     
     function showPage(page) {
@@ -956,6 +957,9 @@ function submitAddToList() {
     })
     .then(data => {
         showPopup('successPopup2', data.message);
+        setTimeout(() => {
+                location.reload();
+            }, 3000);
         closeCourseInfo(); 
     })
     .catch(error => {
