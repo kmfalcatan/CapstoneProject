@@ -13,6 +13,713 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <style>
+        
+
+.barContainer:hover{
+  background-color: rgb(207,207,207); 
+  color: rgb(72,72,72);
+}
+
+.barContainer1:hover{
+  background-color: rgb(207,207,207); 
+  color: rgb(72,72,72);
+}
+@media only screen and (max-width: 1024px){
+.headerContainer{
+  display: flex;
+}
+
+.sideBarContainer{
+  display: none;
+}
+}
+
+  /*laptop*/
+  @media only screen and (min-width: 1025px){
+.sideBarContainer{
+  height: 100%;
+  width: 13rem;
+  position: fixed;
+  background-color: rgb(228, 228, 228);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+}
+
+.headerContainer{
+  display: none;
+}
+
+.subContainer1000{
+  margin-left: 13rem;
+  width: 84%;
+}
+
+.filterContainer{
+  margin-top: 3rem;
+}
+
+  .titleContainer890{
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  color: rgb(72,72,72);
+  border-bottom: solid rgb(143, 143, 143) 1px;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+
+.ButtonContainer890{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.subButtonContainer890{
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 0 0.5rem;
+  transition: all 0.15s;
+  gap: 0.5rem;
+}
+
+.subButtonContainer890:hover{
+  background-color: rgb(207,207,207); 
+  color: rgb(72,72,72);
+}
+
+.iconContainer890{
+  height: 100%;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon890{
+  height: 90%;
+  width: 90%;
+}
+
+.textContainer890{
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600; 
+  color: rgb(72,72,72);
+}
+
+a{
+  text-decoration: none;
+}
+}
+        .popUpMessageContainer{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.534);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 5px;
+}
+
+.popUpMessageContainer1{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.534);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.subPopUpMessageContainer{
+  width: 20rem;
+  border-radius: 0.5rem;
+  background-color: rgb(233,233,233);
+  animation: fadeInScale 0.4s ease-in-out;
+}
+
+.subPopUpMessageContainer1{
+  width: 20rem;
+  height: 20rem;
+  border-radius: 0.5rem;
+  background-color: rgb(233,233,233);
+}
+
+.imageContainer88{
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image88{
+  height: 100%;
+}
+
+.image89{
+  height: 100%;
+  animation: rotate 3s linear infinite;
+}
+
+.textContainer88{
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.buttonContainer88{
+  height: 2.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: right; padding-right: 1rem;
+  gap: 0.5rem;
+}
+
+.button88{
+  height: 2rem;
+  width: 4rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgb(158, 21, 21);
+  color: rgb(233,233,233);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.button88:hover{
+    background-color: transparent;
+    color: rgb(158, 21, 21);
+    border: solid rgb(158, 21, 21) 1px;
+}
+
+.button88:active{
+    transform: scale(0.9);
+}
+
+.button89{
+  height: 2rem;
+  width: 4rem;
+  border: solid rgb(158, 21, 21) 1px;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: rgb(158, 21, 21);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.button89:hover{
+    background-color: rgb(158, 21, 21);
+    color: rgb(233,233,233);
+}
+
+.button89:active{
+    transform: scale(0.9);
+}
+
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  from{
+    transform: rotate(0deg);
+  } to{
+    transform: rotate(-360deg);
+  }
+}
+
+/*tablet*/
+@media only screen and (min-width: 601px) {
+  .subPopUpMessageContainer{
+    width: 30rem;
+  }
+  
+  .subPopUpMessageContainer1{
+    width: 30rem;
+    height: 20rem;
+  }
+
+  .imageContainer88{
+    height: 15rem;
+  }
+}
+        *{
+    padding: 0;
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body{
+    background-color: rgb(43,43,43);
+}
+
+.container{
+    background-color: rgb(43,43,43);
+    padding-bottom: 1rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 5px;
+}
+
+.headerContainer{
+    flex-direction: row;
+    align-items: center;
+}
+
+.menubarContainer{
+    padding-top: 2px;
+    width: 3.125rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.line{
+    border: solid 0.125rem;
+    width: 1.563rem;
+    margin-bottom: 0.313rem;
+    margin-top: 0.5rem;
+    margin-left: 0.563rem;
+    border-color: white;
+}
+
+.hidden{
+    display: none;
+}
+
+.change .line:nth-child(1) {
+    transform: rotate(-45deg) translate(-9px, 0.625rem);
+}
+
+.change .line:nth-child(2) {
+    opacity: 0;
+}
+
+.change .line:nth-child(3) {
+    transform: rotate(45deg) translate(-0.438rem, -0.5rem);
+}
+
+.logoContainer{
+    height: 4rem;
+    width: 4rem;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subLogoContainer{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 10rem;
+    background-color: rgb(158, 21, 21);
+}
+
+.subMenubarContainer{
+    width: 10rem;
+    background-color: rgb(233,233,233);
+    border-radius: 0 0 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: -10rem;
+}
+
+.fadeIn{
+    animation: sideIn 0.6s ease forwards
+}
+
+.barContainer, .barContainer1{
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: rgb(43,43,43);
+}
+
+.barContainer:hover{
+    background-color: rgb(158, 21, 21);
+    color: rgb(233,233,233);
+}
+
+.barContainer1:hover{
+    background-color: rgb(158, 21, 21);
+    color: rgb(233,233,233);
+    border-radius: 0 0 0.5rem 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+@keyframes sideIn {
+    from{
+
+    } to{
+        left: 0;
+    }
+}
+
+.subContainer{
+    height: 92.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.settingContainer{
+    height: 20rem;
+    width: 20rem;
+    border-radius: 0.5rem;
+    background-color: rgb(158, 21, 21);
+    box-shadow: 5px 5px 10px rgb(72,72,72);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.settingContainer:hover{
+    transform: scale(1.1);
+}
+
+.settingContainer:active{
+    transform: scale(0.9);
+    box-shadow: none;
+}
+
+.subSettingContainer{
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.person{
+    height: 100%;
+}
+
+.textContainer4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    color: rgb(233,233,233);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.loginFormContainer{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.534);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subLoginFormContainer{
+    width: 24rem;
+    border-radius: 0.5rem;
+    background-color: rgb(233,233,233);
+}
+
+.closeContainer{
+    height: 3.5rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.closeContainer1{
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 0.5rem 0 0 0.5rem;
+}
+
+.close1{
+    height: 2rem;
+    cursor: pointer;
+}
+
+.subCloseContainer{
+    height: 100%;
+    width: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close{
+    height: 50%;
+    cursor: pointer;
+}
+
+.loginTextContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding-right: 2.5rem;
+}
+
+.inputContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.subInputContainer{
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputEmail{
+    height: 3rem;
+    width: 90%;
+    border-radius: 0.5rem;
+    border: solid black 1px;
+    padding-left: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.loginButton1{
+    height: 2.5rem;
+    width: 7rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    background-color: rgb(43,43,43);
+    color: rgb(233,233,233);
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+}
+
+.loginButton1:hover{
+    background-color: transparent;
+    border: solid rgb(43,43,43) 1px;
+    color: rgb(43,43,43);
+}
+
+.loginButton1:active{
+    transform: scale(0.9);
+}
+
+.addListContainer{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.534);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subAddListContainer{
+    width: 24rem;
+    background-color: rgb(233,233,233);
+    border-radius: 0.5rem;
+    padding-bottom: 1rem;
+}
+
+.infoContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.subInfoContainer{
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info{
+    width: 90%;
+    height: 100%;
+    border-radius: 0.5rem;
+    border: solid rgb(43,43,43) 1px;
+    background-color: rgb(217,217,217);
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.subInfoContainer1{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info1{
+    width: 90%;
+    height: 100%;
+    border-radius: 0.5rem;
+    border: solid rgb(43,43,43) 1px;
+    background-color: rgb(217,217,217);
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.buttonContainer{
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.closeContainer{
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.subCloseContainer{
+    height: 100%;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeButton{
+    height: 50%;
+    cursor: pointer;
+}
+
+.buttonContainer2{
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    flex-direction: row;
+}
+
+.button1{
+    height: 2rem;
+    width: 5rem;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+    background-color: rgb(158, 21, 21);
+    color: rgb(233,233,233);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.15s;
+}
+
+.button2{
+    height: 2rem;
+    width: 5rem;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: rgb(158, 21, 21);
+    border: solid rgb(158, 21, 21) 1px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 1rem;
+}
+
+.button1:hover{
+    color: rgb(158, 21, 21);
+    border: solid rgb(158, 21, 21) 1px;
+    background-color: transparent ;
+}
+
+.button1:active{
+    transform: scale(0.9);
+}
+
+.button2:hover{
+    background-color: rgb(158, 21, 21);
+    color: rgb(233,233,233);
+}
+
+.button2:active{
+    transform: scale(0.9);
+}
 
         .barContainer:hover{
           background-color: rgb(207,207,207); 
